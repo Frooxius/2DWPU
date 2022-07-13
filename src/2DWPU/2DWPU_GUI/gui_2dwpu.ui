@@ -33,6 +33,10 @@
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
+    <property name="styleSheet">
+     <string notr="true">selection-color: rgb(0, 0, 0);
+selection-background-color: rgb(85, 255, 0);</string>
+    </property>
     <property name="lineWidth">
      <number>1</number>
     </property>
@@ -43,6 +47,9 @@
      <bool>true</bool>
     </property>
     <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="cornerButtonEnabled">
      <bool>false</bool>
     </property>
     <property name="rowCount">
@@ -177,7 +184,7 @@
    <widget class="QPushButton" name="BsimMax">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>210</x>
       <y>20</y>
       <width>51</width>
       <height>23</height>
@@ -213,6 +220,19 @@
     </property>
     <property name="value" stdset="0">
      <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Bsim30Hz">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>20</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>30 Hz</string>
     </property>
    </widget>
   </widget>

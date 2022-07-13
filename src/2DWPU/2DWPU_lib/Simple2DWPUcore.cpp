@@ -47,7 +47,13 @@ namespace WPU2D
 			reg.IS = 0;
 			reg.PE = 0;
 			reg.PO = 0;
+
+			// preserve the secondary status
+			bool secondary = reg.P_SW.SC();
 			reg.P_SW.raw = 0;
+			reg.P_SW.SC(secondary);
+
+			parallel.rqst = false;
 
 			reg.PC.xPC = 0;
 			reg.PC.yPC = 0;
@@ -163,14 +169,30 @@ namespace WPU2D
 		// One cycle of the core
 		void Simple2DWPUcore::InternCycle()
 		{
+			CheckParallelInvoke();
+
+			parallel.rqst = false;	// drop it
+
 			if(reg.P_SW.AC())
 				ExecuteInstruction(DecodedInstr(fetch_instr));
 		}
 
+		void Simple2DWPUcore::CheckParallelInvoke()
+		{
+			// if it's a secondary core, check if there's some task waiting
+			if(!reg.P_SW.AC() && reg.P_SW.SC() && parallel.rqst)
+			{
+				parallel.free = false;
+				reg.ARG = parallel.parARG;
+				reg.PC = parallel.parPC;
+				fetch_instr = FetchInstruction(reg.PC);
+				reg.P_SW.AC(true);
+			}
+		}
+
 		void Simple2DWPUcore::FlowQuery(QueryDir dir)
 		{
-			if(dir.dir == sdir_C)
-				dir.dir = InvertSimpleDir(InstrStackTop().RD());
+			dir = ProcessDir(dir);	// in case it's C
 
 			// Update the PC
 			UpdatePC(dir);
@@ -204,6 +226,7 @@ namespace WPU2D
 			{
 				reg.ARG = val;
 				InstructionFlowWord ifw = InstrStackPop();
+				reg.P_SW.PDF(ifw.PDF());
 				reg.IS = ifw.IS();
 				UpdatePC(QueryDir(ifw.RD(), ifw.RL()));
 				fetch_instr = FetchInstruction(reg.PC);
@@ -212,8 +235,19 @@ namespace WPU2D
 			{
 				if(err.GetCode() == StackUnderflow)
 				{
-					// this is a legitimate situation and causes call to the block defined in the program header
-					ProgramBlockJump(pblock.CRB);
+					// this is a legitimate situation and causes the block to return
+					if(reg.P_SW.SC())
+					{
+						// if it's a secondary core, end the execution and return
+						Activate(false);
+						parallel.parARG = reg.ARG;	// the result
+						parallel.free = true;
+						Reset();
+					}
+					else
+					{
+						ProgramBlockJump(pblock.CRB);
+					}
 				}
 				else
 					throw err;
@@ -223,21 +257,7 @@ namespace WPU2D
 		void Simple2DWPUcore::UpdatePC(QueryDir dir)
 		{
 			if(!reg.P_SW.PCB())
-			switch(dir.dir)
-			{
-			case sdir_U:
-				reg.PC.yPC -= dir.length+1;
-				break;
-			case sdir_R:
-				reg.PC.xPC += dir.length+1;
-				break;
-			case sdir_D:
-				reg.PC.yPC += dir.length+1;
-				break;
-			case sdir_L:
-				reg.PC.xPC -= dir.length+1;
-				break;
-			}
+				reg.PC.Move(dir);
 		}
 
 		reg16 Simple2DWPUcore::FetchInstruction(regPC addr)
@@ -420,6 +440,13 @@ namespace WPU2D
 			}
 		}
 
+		QueryDir Simple2DWPUcore::ProcessDir(QueryDir dir)
+		{
+			if(dir.dir == sdir_C)
+				dir.dir = InvertSimpleDir(InstrStackTop().RD());
+			return dir;
+		}
+
 		void Simple2DWPUcore::PerformOperation(DecodedInstr instr)
 		{
 			switch(reg.IS)
@@ -431,14 +458,33 @@ namespace WPU2D
 					reg.IS = 2;	// skip to the calculation phase
 				}
 				else
+				{
 					reg.IS = 1;
+					// parallelism
+					parallel.rqst = true;
+					parallel.parARG = reg.ARG;
+					// move the other way
+					parallel.parPC = reg.PC;
+					parallel.parPC.Move(ProcessDir(instr.DecodeDirection(true)));
+				}
 				FlowQuery(instr.DecodeDirection(false));
 				break;
 
 			case 1:
-				ArgStackPush(reg.ARG);	// save the value
-				reg.IS = 2;
-				FlowQuery(instr.DecodeDirection(true));	// get the second value
+				if(!reg.P_SW.PDF())
+				{
+					// normal processing
+					ArgStackPush(reg.ARG);	// save the value
+					reg.IS = 2;
+					FlowQuery(instr.DecodeDirection(true));	// get the second value
+				}
+				else
+				{
+					// fetch data from the parallelism manager
+					if(parallel.redy)
+						// but only if the data are ready
+						FlowReturn( Operation(reg.ARG, parallel.parARG, (byte)instr.index) );
+				}
 				break;
 
 			case 2:
@@ -1342,5 +1388,20 @@ namespace WPU2D
 		{
 			return io->Write8(val, addr);
 		}
+
+		// *******************************************
+		//		PARALLELISM
+
+		void Simple2DWPUcore::C_ACPT(bool set)
+		{
+			if(set)
+			{
+				// set the PDF bit
+				InstructionFlowWord ifw = InstrStackPop();
+				ifw.PDF(true);
+				InstrStackPush(ifw);
+			}
+		}
+
 	}
 }

@@ -114,6 +114,7 @@ namespace WPU2D
 			void FlowQuery(QueryDir dir);
 			void FlowQuery();	// query without changing the PC
 			void UpdatePC(QueryDir dir);
+			QueryDir ProcessDir(QueryDir dir);
 
 			void ProgramBlockJump(regPC destination);
 
@@ -134,6 +135,17 @@ namespace WPU2D
 			void PerformDouble(DecodedInstr instr);
 			void PerformExtended(DecodedInstr instr);
 
+			
+			/*  ********************************
+						Parallelism
+				*******************************/
+			struct
+			{
+				regPC parPC;
+				bool rqst, free, take, redy;
+				reg16 parARG;
+			} parallel;
+
 			// Initialization
 			void Initialize(Memory *RAM, IOinterface *io,
 				uint instr_stack_size, uint arg_stack_size,
@@ -148,18 +160,21 @@ namespace WPU2D
 
 			void Activate(bool activate) { reg.P_SW.AC(activate); }
 
+			void CheckParallelInvoke();
+
 			// Paralellism - output
-			bool C_FREE();
-			bool C_RQST();
-			ushort C_xPC();
-			ushort C_yPC();
-			uint C_ARG();
+			bool C_FTCH() { return reg.P_SW.PDF(); }
+			bool C_FREE() { return !reg.P_SW.AC(); }
+			bool C_RQST() { return parallel.rqst; }
+			regPC C_PC()  { return parallel.parPC; }
+			reg32 C_ARG() { return parallel.parARG; }
 
 			// Paralelism input
-			void C_RQST(bool set);
-			void C_xPC(ushort set);
-			void C_yPC(ushort set);
-			void C_ARG(uint set);
+			void C_REDY(bool set) { parallel.redy = set; }
+			void C_ACPT(bool set);
+			void C_RQST(bool set) { parallel.rqst = set; }
+			void C_PC(regPC set)  { parallel.parPC = set; }
+			void C_ARG(reg32 set)  { parallel.parARG = set; }
 
 			// performs a single cycle of the individual core
 			void Cycle() { InternCycle(); }

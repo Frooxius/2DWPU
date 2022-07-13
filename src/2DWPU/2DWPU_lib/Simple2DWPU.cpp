@@ -22,6 +22,9 @@ namespace WPU2D
 			for(int i = 1; i < (int)ncores; ++i)
 				cores[i] = new Simple2DWPUcore(RAM, io, true, &reg);
 
+			// parallelism manager
+			this->pm = new Simple2DWPU_PM(cores, ncores);
+
 			Reset();
 
 			cores[0]->Activate(true);
@@ -33,6 +36,8 @@ namespace WPU2D
 
 			for(uint i = 0; i < ncores; ++i)
 				cores[i]->Cycle();
+
+			pm->Cycle();
 
 			return true;	// TODO
 		}
@@ -56,6 +61,8 @@ namespace WPU2D
 
 			for(int i = 0; i < ncores; ++i)
 				cores[i]->Reset();
+
+			pm->Reset();
 
 			cores[0]->Activate(true);
 		}

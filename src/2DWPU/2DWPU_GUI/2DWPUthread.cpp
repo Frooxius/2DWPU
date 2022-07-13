@@ -1,6 +1,6 @@
 #include "2DWPUthread.h"
 
-WPU2Dthread::WPU2Dthread(WPU2Dcore *wpu, float *frequency, bool *unlimited)
+WPU2Dthread::WPU2Dthread(WPU2Dcore **wpu, float *frequency, bool *unlimited)
 {
     this->wpu = wpu;
     time = QTime();
@@ -38,6 +38,9 @@ void WPU2Dthread::run()
         }
         time.restart();
 
+		int updates = 1;
+		if(*freq >= 1000.0f || *maxhz)
+			updates = 1000;
         do
         {
             if(stop)
@@ -46,12 +49,14 @@ void WPU2Dthread::run()
                 StopMutex.unlock();
                 return;
             }
-            wpu->Cycle(1000);
-            cyclesdelta+=1000;
+            (*wpu)->Cycle(updates);
+            cyclesdelta+=updates;
         } while( (cyclesdelta < updatecycles || *maxhz) && time.elapsed() < updatems);
 
-        emit UpdateUI();
-
-        msleep(std::min(std::max(updatems-time.elapsed(), 0), 1000));
+		if(!(*maxhz))
+		{
+		     emit UpdateUI();
+		     msleep(std::min(std::max(updatems-time.elapsed(), 0), 1000));
+		}
     }
 }

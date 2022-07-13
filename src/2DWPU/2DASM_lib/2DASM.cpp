@@ -93,6 +93,7 @@ namespace WPU2D
 				throw ASM2D_Exception(ERR_ASM2D_TOO_MANY_COLUMNS);
 
 			// fill it up
+			if(row.size() > 0)
 			while(row.size() != 32)
 				row.push_back("RET 0");
 

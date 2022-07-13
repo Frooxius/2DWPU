@@ -41,6 +41,11 @@ public slots:
 	void SimStep();
 	void SimStop();
 	void SimMax();
+	void Sim30Hz();
+	void SimReset();
+	void SimSetCores(uint cores);
+
+	void ConfigureCoreNumber();
 
 	// Opening and saving stuff
 	void Open2DASM();

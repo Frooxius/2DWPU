@@ -37,7 +37,7 @@ namespace WPU2D
 
 			virtual IOinterface *GetIOinterface() = 0;
 
-
+			virtual void CheckParallelInvoke() = 0;
 		};
 	}
 }

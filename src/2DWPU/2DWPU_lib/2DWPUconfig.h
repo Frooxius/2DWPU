@@ -18,5 +18,7 @@ namespace WPU2D
 
 		const int DEFAULT_INSTR_STACK_SIZE = 1024;
 		const int DEFAULT_ARG_STACK_SIZE = 256;
+
+		const int MAX_PARALLEL_RESULTS = 16;
 	}
 }

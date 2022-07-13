@@ -1,6 +1,7 @@
 #pragma once
 #include "Global.h"
 #include "2DWPUconfig.h"
+#include "InstructionInfo.h"
 
 namespace WPU2D
 {
@@ -10,6 +11,25 @@ namespace WPU2D
 		{
 			reg5 xPC, yPC;
 			reg24 BS;
+
+			void Move(Shared::QueryDir dir)
+			{
+				switch(dir.dir)
+				{
+				case Shared::sdir_U:
+					yPC -= dir.length+1;
+					break;
+				case Shared::sdir_R:
+					xPC += dir.length+1;
+					break;
+				case Shared::sdir_D:
+					yPC += dir.length+1;
+					break;
+				case Shared::sdir_L:
+					xPC -= dir.length+1;
+					break;
+				}
+			}
 		};
 
 		// this struct describes the shared portion of the SW register
@@ -42,6 +62,7 @@ namespace WPU2D
 			bool AC() { return  (raw & 0x0080) != 0; }
 			bool PCB() { return (raw & 0x0100) != 0; }
 			bool DR() { return (raw & 0x0200) != 0; }
+			bool PDF() { return (raw & 0x0400) != 0; }
 			uint DS() { return (raw & 0xF000) >> 12; }
 
 			void CB(bool set) { SetBit(&raw, 0, set); }
@@ -51,6 +72,7 @@ namespace WPU2D
 			void AC(bool set) { SetBit(&raw, 7, set); }
 			void PCB(bool set) { SetBit(&raw, 8, set); }
 			void DR(bool set) { SetBit(&raw, 9, set); }
+			void PDF(bool set) { SetBit(&raw, 10, set); }
 			void DS(uint val) {
 				raw &= ~0xF000U;	// erase the three bits
 				raw |= (val << 12) & 0xF00U;

@@ -9,6 +9,7 @@
 #include "Simple2DWPUcore.h"
 #include "IOinterface.h"
 #include "Global.h"
+#include "Simple2DWPUparallelismManager.h"
 
 namespace WPU2D
 {
@@ -23,6 +24,9 @@ namespace WPU2D
 
 			// IO interface for communication with external devices
 			IOinterface *io;
+
+			// Parallelism manager
+			Simple2DWPU_PM *pm;
 
 			// Registers
 			GlobalRegisters reg;
@@ -62,6 +66,7 @@ namespace WPU2D
 
 			IOinterface *GetIOinterface() { return io; }
 
+			void CheckParallelInvoke() { for(int i = 0; i < ncores; ++i) cores[i]->CheckParallelInvoke(); }
 		};
 	}
 }

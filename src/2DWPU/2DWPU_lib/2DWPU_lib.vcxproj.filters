@@ -89,5 +89,8 @@
     <ClCompile Include="IOinterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Simple2DWPUparallelismManager.cpp">
+      <Filter>Source Files\SimpleCore</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

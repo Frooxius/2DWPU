@@ -4,6 +4,7 @@
 #include "qfiledialog.h"
 #include "FileLineReader.h"
 #include "MemoryBinWriter.h"
+#include "qinputdialog.h"
 
 #include "IOsimpleLCD.h"
 #include "IOrandgen.h"
@@ -21,6 +22,10 @@ GUI_2DWPU::GUI_2DWPU(QWidget *parent, Qt::WFlags flags)
 	connect(ui.BsimStep, SIGNAL(clicked()), this, SLOT(SimStep()));
 	connect(ui.BsimMax, SIGNAL(clicked()), this, SLOT(SimMax()));
 	connect(ui.BsimStop, SIGNAL(clicked()), this, SLOT(SimStop()));
+	connect(ui.Bsim30Hz, SIGNAL(clicked()), this, SLOT(Sim30Hz()));
+	connect(ui.actionReset, SIGNAL(triggered()), this, SLOT(SimReset()));
+	connect(ui.actionSet_Cores, SIGNAL(triggered()), this, SLOT(ConfigureCoreNumber()));
+
 
 	timerFreq = new QTimer();
 	connect(timerFreq, SIGNAL(timeout()), this, SLOT(UpdateFreq()));
@@ -56,10 +61,7 @@ GUI_2DWPU::GUI_2DWPU(QWidget *parent, Qt::WFlags flags)
 	for(int i = 0; i < ram->size; ++i)
 		*(ram->data+i) = 0xFFU;
 
-	wpu = new WPU2D::Core::Simple2DWPU(ram, 1);
-	wpu->GetIOinterface()->InstallDevice(new WPU2D::Core::IOrandgen(), 0);
-	wpu->GetIOinterface()->InstallDevice(new WPU2D::Core::IOsimpleLCD(
-		this->img_SimpleLCD), 1);
+	SimSetCores(1);	// creates the WPU
 
 	// frequency and such
 	wpuFreq = 0.0f;
@@ -67,8 +69,8 @@ GUI_2DWPU::GUI_2DWPU(QWidget *parent, Qt::WFlags flags)
 	wpuPrevCycles = 0;
 
 	// setup the thread
-	wpuThread = new WPU2Dthread(wpu, &wpuFreq, &wpuFreqMax);
-	//connect(wpuThread, SIGNAL(UpdateUI()), this, SLOT(Update()));
+	wpuThread = new WPU2Dthread(&wpu, &wpuFreq, &wpuFreqMax);
+	connect(wpuThread, SIGNAL(UpdateUI()), this, SLOT(Update()));
 
 	// Lastly, update the interface
 	Update();
@@ -83,8 +85,9 @@ GUI_2DWPU::~GUI_2DWPU()
 
 void GUI_2DWPU::Update(bool force_full)
 {
+	if(wpuFreqMax)
+		return;
 	UpdateProgramBlockView(force_full);
-
 	UpdateCoreTextInfo();
 }
 
@@ -109,9 +112,15 @@ void GUI_2DWPU::UpdateProgramBlockView(bool force_full)
 		|| force_full)
 		DecodeProgramBlockTable();
 
-	ui.programBlockInstrTable->setCurrentCell(
-		wpu->GetPrivateReg(0)->PC.yPC, wpu->GetPrivateReg(0)->PC.xPC,
-		QItemSelectionModel::SelectionFlag::ClearAndSelect);
+	ui.programBlockInstrTable->clearSelection();
+	wpu->CheckParallelInvoke();
+	for(int i = 0; i < wpu->GetCoreCount(); ++i)
+	{
+		if(wpu->GetPrivateReg(i)->P_SW.AC())
+			ui.programBlockInstrTable->setCurrentCell(
+				wpu->GetPrivateReg(i)->PC.yPC, wpu->GetPrivateReg(i)->PC.xPC,
+				QItemSelectionModel::SelectionFlag::Select);
+	}
 }
 
 void GUI_2DWPU::DecodeProgramBlockTable()
@@ -150,6 +159,22 @@ void GUI_2DWPU::SimMax()
 	wpuThread->StartIfNotRunning();
 }
 
+void GUI_2DWPU::SimReset()
+{
+	SimStop();
+	wpu->Reset();
+	Update();
+}
+
+void GUI_2DWPU::Sim30Hz()
+{
+	wpuFreq = 5.0f;
+	wpuFreqMax = false;
+	wpuThread->StartIfNotRunning();
+}
+
+
+
 QString GUI_2DWPU::GetGlobalInfo()
 {
 	QString info;
@@ -186,17 +211,19 @@ QString GUI_2DWPU::GetCoreInfo(uint core)
 		+ "<b> PE: </b>" + QString::number(wpu->GetPrivateReg(core)->PE, 16)
 		+ "<br/><b>SA: </b>" + QString::number(wpu->GetPrivateReg(core)->SA, 16)
 		+ "<b> SI: </b>" + QString::number(wpu->GetPrivateReg(core)->SI, 16);
-
+	info += "<br/>";
 	return info;
 }
 
 void GUI_2DWPU::Open2DASM()
 {
 	QString fname = QFileDialog::getOpenFileName();
+	FileLineReader *reader = new FileLineReader(fname.toAscii().data());
 	WPU2D::ASM2D::Assembler2D::Assembly(
-		new FileLineReader(fname.toAscii().data()),
+		reader,
 		new MemoryBinWriter(this->ram));
 
+	delete reader;
 	Update(true);
 	wpu->Reset();
 }
@@ -206,4 +233,20 @@ void GUI_2DWPU::UpdateFreq()
     // detect real frequency
 	ui.frequencyL->display((double)wpu->GetCycles()-wpuPrevCycles);
     wpuPrevCycles = wpu->GetCycles();
+}
+
+void GUI_2DWPU::SimSetCores(uint cores)
+{
+	wpu = new WPU2D::Core::Simple2DWPU(ram, cores);
+	wpu->GetIOinterface()->InstallDevice(new WPU2D::Core::IOrandgen(), 0);
+	wpu->GetIOinterface()->InstallDevice(new WPU2D::Core::IOsimpleLCD(
+		this->img_SimpleLCD), 1);
+
+	Update();
+}
+
+void GUI_2DWPU::ConfigureCoreNumber()
+{
+	SimSetCores(QInputDialog::getInt(this, "Change amount of cores",
+		"Please enter amount of cores:", 1, 1, 128));
 }

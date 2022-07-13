@@ -13,7 +13,7 @@ class WPU2Dthread : public QThread
 {
     Q_OBJECT
 
-	WPU2Dcore *wpu;
+	WPU2Dcore **wpu;
     volatile float *freq;
     volatile bool *maxhz;
     volatile bool stop;
@@ -21,7 +21,7 @@ class WPU2Dthread : public QThread
     QMutex StopMutex;
 
 public:
-    WPU2Dthread(WPU2Dcore *wpu, float *frequency, bool *unlimited);
+    WPU2Dthread(WPU2Dcore **wpu, float *frequency, bool *unlimited);
     void run();
     void StartIfNotRunning() { if(!isRunning()) start(QThread::NormalPriority); sleep(0); }
     void Stop();

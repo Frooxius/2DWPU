@@ -70,6 +70,14 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <CallingConvention>FastCall</CallingConvention>
+      <OptimizeForWindowsApplication>true</OptimizeForWindowsApplication>
+      <FlushDenormalResultsToZero>true</FlushDenormalResultsToZero>
+      <EnableMatrixMultiplyLibraryCall>Yes</EnableMatrixMultiplyLibraryCall>
+      <LoopUnrolling>1000</LoopUnrolling>
+      <Parallelization>true</Parallelization>
+      <UseIntelOptimizedHeaders>true</UseIntelOptimizedHeaders>
+      <GenerateAlternateCodePaths>SSE42</GenerateAlternateCodePaths>
+      <UseProcessorExtensions>HOST</UseProcessorExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,6 +111,7 @@
     <ClCompile Include="IOinterface.cpp" />
     <ClCompile Include="Simple2DWPU.cpp" />
     <ClCompile Include="Simple2DWPUcore.cpp" />
+    <ClCompile Include="Simple2DWPUparallelismManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedLib\SharedLib.vcxproj">

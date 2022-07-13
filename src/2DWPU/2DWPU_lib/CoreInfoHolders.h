@@ -57,11 +57,12 @@ namespace WPU2D
 		public:
 			InstructionFlowWord() { data = 0; }
 			InstructionFlowWord(reg8 raw) { data = raw; }
-			InstructionFlowWord(SimpleDir dir, byte length, byte status)
+			InstructionFlowWord(SimpleDir dir, byte length, byte status, bool pdf = false)
 			{
 				RD(dir);
 				RL(length);
 				IS(status);
+				PDF(pdf);
 			}
 
 			operator reg8()
@@ -90,8 +91,14 @@ namespace WPU2D
 
 			void IS(byte status)
 			{
-				data &= 0xF0;	// erase lower 4 bits
-				data |= status & 0x0F;	// store the status there
+				data &= 0xF8;	// erase lower 3 bits
+				data |= status & 0x07;	// store the status there
+			}
+
+			void PDF(bool set)
+			{
+				data &= 0xF7U;	// erase the 4th bit
+				data |= (set)?0x08U:0;
 			}
 
 			SimpleDir RD()
@@ -106,7 +113,12 @@ namespace WPU2D
 
 			byte IS()
 			{
-				return data & 0x0FU;
+				return data & 0x07U;
+			}
+
+			bool PDF()
+			{
+				return (data & 0x08U) != 0;
 			}
 		};
 

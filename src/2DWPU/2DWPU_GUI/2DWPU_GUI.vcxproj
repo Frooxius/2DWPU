@@ -79,6 +79,7 @@
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;QtMultimedia4.lib;QtXml4.lib;QtScript4.lib;QtXmlPatterns4.lib;QtTest4.lib;QtDeclarative4.lib;QtUiTools.lib;Qt3Support4.lib;comdlg32.lib;QtScriptTools4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/LIBPATH:"D:\Program Files (x86)\Intel\Composer XE 2011 SP1\compiler\lib\ia32" /LIBPATH:"D:\Program Files (x86)\Intel\Composer XE 2011 SP1\ipp\lib\ia32" %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
