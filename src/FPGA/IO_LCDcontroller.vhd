@@ -9,7 +9,7 @@ entity IO_LCDcontroller is
 		xpos, ypos, color : out STD_LOGIC_VECTOR(15 downto 0);
 		touchx, touchy : in STD_LOGIC_VECTOR(11 downto 0);
 		ready : in STD_LOGIC;
-		write_px, swap : out STD_LOGIC
+		write_px, swap, singlebuf : out STD_LOGIC
 		);
 end entity;
 
@@ -55,6 +55,9 @@ begin
 		
 	readyDetect : entity work.IOdeviceWrapper
 		port map( X"0008", actual_addr, '0', rd, open, open, B"0000_0000_0000_000" & ready, out_val);
+		
+	disableDouble : entity work.IOdeviceWrapper
+		port map( X"0009", actual_addr, wr, '0', singlebuf, open, X"0000", open);
 		
 	process is
 	begin

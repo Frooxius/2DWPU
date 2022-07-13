@@ -14,7 +14,7 @@ end entity;
 architecture default of ArgumentStack is
 	signal push_cmd, pop_cmd : bit := '0';
 
-	signal addr : STD_LOGIC_VECTOR (8 DOWNTO 0);
+	signal addr : STD_LOGIC_VECTOR (7 DOWNTO 0);
 	signal data : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	signal wren, rden : STD_LOGIC := '0';
 	signal mout : STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -28,7 +28,7 @@ begin
 		wait until clk = '1';
 		
 		if reset = '1' then
-			addr <= B"1_1111_1111";
+			addr <= B"1111_1111";
 			wren <= '0';
 			rden <= '0';
 			ARG <= X"00000000";

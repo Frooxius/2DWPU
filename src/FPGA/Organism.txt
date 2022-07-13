@@ -1,4 +1,4 @@
-static block D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/Organism.txt
+static block Organism
 [QRY_4RD]	[HALT]	[HALT]	[HALT]	[QRY_3R]	[HALT]	[RET 1]	[QRY_LR]	[QNZ_R ARG]	[SUB_DR]	[MUL_R2R]	[RET 8]	[ADD_R2R]	[RET 1]	[RET 96]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	
 [QRY_RD]	[RET 0]	[HALT]	[RET 16]	[RET #10]	[SL_L2L]	[RET #10]	[OR_L2L]	[<MOVT_L *ST]	[QRY_LR]	[<MOVT_R ST]	[ADD_R2R]	[RET 4]	[RET ST]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	
 [QZ_D ARG]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[RET 163]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	[HALT]	

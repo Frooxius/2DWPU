@@ -15,8 +15,8 @@
 
 FUNCTION DataRAM 
 (
-	address_a[15..0],
-	address_b[15..0],
+	address_a[14..0],
+	address_b[14..0],
 	clock,
 	data_a[7..0],
 	data_b[7..0],

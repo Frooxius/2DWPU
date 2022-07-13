@@ -13,7 +13,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|DisplayController:LCDInteface|VideoMem111:VideoRAM|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ohk1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core2|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core2|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
@@ -23,21 +23,25 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core6|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core6|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core3|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:VGAInteface|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_qgh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|VGA800x600withProgress:VGAdisplay|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_ocm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|VGA800x600withProgress:VGAdisplay|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_ocm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_ccm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|PLL40Mhz:PLLclock40|altpll:altpll_component" CBX_FILE_NAME="PLL40Mhz_altpll.v"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_ccm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
@@ -69,7 +73,6 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:LCDInteface|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_qgh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
@@ -79,8 +82,6 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core0|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
@@ -89,7 +90,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core1|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
@@ -97,66 +98,71 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core2|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_ccm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_o9m.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core1|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core1|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core3|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_ccm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core4|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core3|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core3|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core5|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_s9m.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core0|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core6|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|lpm_divide:Mod6" CBX_FILE_NAME="lpm_divide_k9m.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core5|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core5|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core7|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:VGAInteface|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_mgh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core2|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core8|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:VGAInteface|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_mgh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core7|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core7|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core9|ProgramMem:ProgramMem|ProgramROM:programmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a262.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|LTM_TOP:LCDcontroller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_uim.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_cqo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core4|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:VGAInteface|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_qgh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|LTM_TOP:LCDcontroller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_vim.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|SimpleBeeper:Beeper|altsyncram:memory_rtl_0" CBX_FILE_NAME="altsyncram_6dc1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core9|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core9|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|SimpleBeeper:Beeper|altsyncram:memory_rtl_1" CBX_FILE_NAME="altsyncram_6dc1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core6|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:LCDInteface|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_mgh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|VGA800x600withProgress:VGAdisplay|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_5jm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|DisplayController:LCDInteface|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_mgh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
@@ -165,14 +171,15 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_khm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|InstrDecoder:controller|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_fhm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|DisplayController:VGAInteface|VideoMem111:VideoRAM|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ohk1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core0|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core0|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|PLL:PLLclock|altpll:altpll_component" CBX_FILE_NAME="PLL_altpll.v"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core4|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core4|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core1|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
@@ -181,17 +188,19 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core8|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pqg1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem0|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7ti2.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core8|ArgumentStack:ARGstack|ArgStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_tqg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem0|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fui2.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core5|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7ti2.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fui2.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|Operation:ALU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_hkm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem2|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7ti2.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem2|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fui2.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|ProgramCounter:PC|lpm_add_sub:Add7" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|Operation:ALU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7ti2.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|DataRam8PortManager:MemInterface|DataDual32Ram:memory|DataRAM:mem3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fui2.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|ProgramCounter:PC|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_9ui.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_test|WPU_2DWPU:Processor|Core2DWPU:Core9|IFW_Stack:IFWstack|InstrStack_RAM:stackmem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cpg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|Operation:ALU|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_kcm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|Operation:ALU|lpm_mult:Mult0" CBX_FILE_NAME="mult_46t.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

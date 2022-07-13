@@ -1,0 +1,4 @@
+static block Simple
+[<MOVT_R LI] [MUL_RD] [ADD_RD] [RET LI]
+[HALT      ] [RET 2]  [RET 1]
+<ENDBLOCK>

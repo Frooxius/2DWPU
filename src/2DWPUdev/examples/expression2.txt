@@ -1,0 +1,6 @@
+block test 
+[QRY_DR] [>MOVT_R HE] [HALT]                
+[DIV_DR] [ADD_R2R] [RET 22] [MUL_R2R] [RET 10] [SUB_R2R] [RET 5] [RET 4]
+[SUB_RD] [ADD_RD]  [MUL_R2R][RET 6]   [RET TR]
+[RET 8]  [SUB_R2R] [RET 1024] [MUL_R2R] [RET 50] [RET 2]
+<ENDBLOCK>

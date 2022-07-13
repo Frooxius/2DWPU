@@ -99,12 +99,12 @@ begin
 					X"00000000" when others; -- make ModelSim happy...
 					
 	mem0 : entity work.DataRAM(SYN)
-		port map( addra0(17 downto 2), addrb0(17 downto 2), clk, vala_in0, valb_in0, rdena, rdenb, wrena, wrenb, vala_out0, valb_out0 );
+		port map( addra0(16 downto 2), addrb0(16 downto 2), clk, vala_in0, valb_in0, rdena, rdenb, wrena, wrenb, vala_out0, valb_out0 );
 	mem1 : entity work.DataRAM(SYN)
-		port map( addra1(17 downto 2), addrb1(17 downto 2), clk, vala_in1, valb_in1, rdena, rdenb, wrena, wrenb, vala_out1, valb_out1 );
+		port map( addra1(16 downto 2), addrb1(16 downto 2), clk, vala_in1, valb_in1, rdena, rdenb, wrena, wrenb, vala_out1, valb_out1 );
 	mem2 : entity work.DataRAM(SYN)
-		port map( addra2(17 downto 2), addrb2(17 downto 2), clk, vala_in2, valb_in2, rdena, rdenb, wrena, wrenb, vala_out2, valb_out2 );
+		port map( addra2(16 downto 2), addrb2(16 downto 2), clk, vala_in2, valb_in2, rdena, rdenb, wrena, wrenb, vala_out2, valb_out2 );
 	mem3 : entity work.DataRAM(SYN)
-		port map( addra3(17 downto 2), addrb3(17 downto 2), clk, vala_in3, valb_in3, rdena, rdenb, wrena, wrenb, vala_out3, valb_out3 );		
+		port map( addra3(16 downto 2), addrb3(16 downto 2), clk, vala_in3, valb_in3, rdena, rdenb, wrena, wrenb, vala_out3, valb_out3 );		
 	
 end architecture;

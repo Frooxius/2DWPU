@@ -1,2 +1,0 @@
-13.4.2012 4:36:47 com.altera.utilities.Launcher launch
-INFO: Launching:D:/altera/11.1sp2/quartus//bin/../sopc_builder/bin/qsys-edit.exe --system-info=DEVICE_FAMILY=Cyclone IV E --project-dir=D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/

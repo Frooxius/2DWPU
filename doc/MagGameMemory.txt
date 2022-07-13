@@ -1,0 +1,19 @@
+Play0Transmitter X		0
+Play0Transmitter Y		4
+Play0Transmitter Xspd		8
+Play0Transmitter Yspd		12
+
+Play0Receiver X			16
+Play0Receiver Y			20
+Play0Receiver Xspd		24
+Play0Receiver Yspd		28
+
+Play1Transmitter X		32
+Play1Transmitter Y		36
+Play1Transmitter Xspd		40
+Play1Transmitter Yspd		44
+
+Play1Receiver X			48
+Play1Receiver Y			52
+Play1Receiver Xspd		56
+Play1Receiver Yspd		60

@@ -1,0 +1,8 @@
+set_global_assignment -name IP_TOOL_NAME "ALTPLL"
+set_global_assignment -name IP_TOOL_VERSION "11.1"
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "PLL40Mhz.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "PLL40Mhz.bsf"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "PLL40Mhz_inst.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "PLL40Mhz.inc"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "PLL40Mhz.cmp"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "PLL40Mhz.ppf"]

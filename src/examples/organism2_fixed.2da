@@ -1,0 +1,55 @@
+block Organism
+
+This portion of code renders the organisms on screen
+
+Registers:
+LI - pointer to the current one
+SQ - X
+RE - Y
+TR - Type
+CI - Energy
+HE - Agressivity
+EL - Potency
+
+Generate a map in the memory
+
+Do a cleanup
+[QRY_R3D]-[QRY_RD] [<MOVT_R ST] [ADD_R2R]     [RET 8000] [MUL_R2R] [RET 24] [RET 512]
+[RET PO] [QRY_RD] [<MOVT_R PO] [MUL_2RR]     [RET 4]    [MUL_R2R]     [RET 416]  [RET 256]
+[SUB_U4R] [QNZ_R PO] [QRY_R3R] [<MOVT_3L PO] [RET 4]    [<MOVT_R *(ST+PO)] [RET -1]
+
+Now generate the map                                    --- Load the values and X, Y ---           --- Calculate the memory pointer to ST ---
+[QRY_D4D]  [QNZ_R LI]--[QRY_DR] [>PUSH_D ST] [QRY_R2R] [<MOVT_D SQ] [QRY_DR]-----[QRY_DR]->[<MOVT_R *ST][RET LI]
+[QRY_DR]--[QRY_DU]  [<MOVT_D LI] [<POP_R  ST] [QRY_2DU] [RET *(ST+0)] [<MOVT_D RE]     [QRY_DR]--[<MOVT_R ST] [ADD_R]   [ADD_R2R] [RET 8000] [MUL_R2R] [RET 24] [RET 512]
+[<MOVT_D ST]  [<MOVT_D LI]  [SUB_R2R] [RET LI] [RET 24] [RET ST] [RET *(ST+4)]     [MUL_RD]--[ADD_DR]--[MUL_2RR] [RET 416] [ADD_2RR] [RET 8] [MOD_2RR] [RET 240] [RET RE]
+[RET 8000]  [MUL_R2R]  [RET 512] [RET 24] [<MOVT_R ST] [ADD_UR] [RET LI]     [RET 4]  [ADD_2RR]-----[RET 8]   [MOD_2RR] [RET 400] [RET SQ]
+
+[QRY_4D] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] [RET CI] [RET HE] [RET TR] [RET HE] 
+[RET HE] [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] 
+[RET TR] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [ADD_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  
+[RET TR] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [ADD_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL]  [AND_UL] [ADD_UL] [SUB_UL] [OR_UL] 
+
+
+Initialization----------------------              --- Load values form struct into registers ----                   ---- Stuff stuff back when returning                         ---Correct values---   -----Random movement-----     --- Loop to calculate ---
+[QRY_R4D] [QRY_DR] [QNZ_R LI] [QRY_DR]-[QRY_D4R]-[HALT]--[HALT]--[HALT]--   [QRY_4RD]--[HALT]--[HALT]--[HALT]--[QRY_DR]         [QRY_2RD]    [HALT]          [QRY_DR] [QNZ_D PO]    [HALT]  [RET LI] [RET 0]       [HALT]      [>PUSH_R PE]--[QRY_RD] [<MOVT_R PE] [AND_R2R] [RET 3] [RET *(ST+8)] 
+[HALT] [QRY_D2D] [SUB_D2D] [<MOVT_L LI] [<POP_D ST] [RET *(ST+0)]  [HALT]  [HALT]     [<POP_D ST]  [TAK *(ST+0)]  [HALT]  [HALT]  [QRY_D4D]         [QRY_RD] [<MOVT_D SQ]     [<MOVT_D PO] [QRY_D2D]    [RET 0]  [SUB_U2D] [QRY_RU]-------[QRY_DR]------[<POP_U PE]  [QRY_RD] [<MOVT_R SQ] [ADD_R3D] [ADD_2RR] [ADD_4UR] [RET SQ]       [SMUL_R2D] [SDIV_R2D]  [SUB_2RR] [RET SQ] 
+[RET 8000] [<MOVT_L ST] [RET LI] [HALT] [>PUSH_D ST] [<MOVT_U SQ]  [RET *(ST+8)]  [HALT]     [>PUSH_D ST]  [>MOVF_U SQ]  [TAK *(ST+8)]  [HALT]  [<MOVT_D SQ]         [<MOVT_D RE] [ADD_D2D]     [RET 16] [<MOVT_L PE]    [QRY_RU]  [QRY_UR] [QNZ_U ARG]     [<MOVT_D ST]  [RET 2]  [QRY_RD] [<MOVT_R RE] [ADD_R2D] [ADD_2RR] [ADD_4UR] [RET RE]       [SMUL_RD] [SDIV_RD]   [SUB_2RR] [RET RE]    
+[HALT] [<MOVT_D LI] [RET 24] [HALT] [QRY_DR] [QRY_UD]  [<MOVT_U TR]  [RET *(ST+20)]     [QRY_DR]--[QRY_UD]  [>MOVF_U TR]  [TAK *(ST+20)]  [MOD_D3D]         [ADD_D2D] [RET SQ]     [HALT] [>DEC_D PO]    [QNZ_U ARG]  [RET *(ST+0)]-[HALT]-------[ADD_2LD]     [RET EL]  [RET 0] [RET HE]  [RET -1]  [RET 1] [QEQ_L2L PE]   [QRY_RL] [<INC_R ARG]   [AND_R2R]   [RET 3]   [RET TR]     
+[QRY_4D] [MUL_D2D] [HALT] [HALT] [<MOVT_D ST] [QRY_DR]--[QRY_U3D]  [<MOVT_U EL]     [<MOVT_D ST]  [QRY_DR]--[QRY_U3D]  [>MOVF_U EL]  [RET SQ]         [QRY_R] [SUB_D2D]     [HALT] [QNZ_D PE]    [QRY_RU]  [NOT_R] [RET *(ST+0)]   [RET 8000]  [AND_U2U]  [ADD_LL] [AND_UL]  [SUB_LR]  [AND_4UR] [RET *(ST+20)] [<INC_R ARG] [SUB_R2R] [RET -1] [RET CI]  [RET SQ]
+[HALT] [RET 512] [HALT] [HALT] [ADD_D2D] [<MOVT_D RE]  [RET *(ST+12)]  [RET *(ST+16)]     [ADD_D2D]  [>MOVF_D RE]  [TAK *(ST+12)]  [TAK *(ST+16)]  [<MOVT_2D RE]        [RET RE] [RET 1]     [HALT] [>DEC_R PE]--- [<POP_D ST]  [RET 4]     [MUL_2RR]--[RET 416] [ADD_4RR] (>[SUB_R2R] [RET PE] [RET 8]<) [ADD_2RR] [RET 8] [MOD_2RR] [RET 240] [RET RE]             
+[HALT] [RET 24] [HALT] [HALT] [RET ST]       [RET *(ST+4)]  [<MOVT_U CI]  [<MOVT_U HE]     [RET ST]        [TAK *(ST+4)]  [>MOVF_U CI]  [>MOVF_U HE]  [RET 400]         [RET 3] [AND_LR]-----[RET #0] [HALT]    [>PUSH_D ST]  [MUL_RU]----[ADD_UR]--[ADD_4RR] (>[SUB_R2R] [RET PO] [RET 8]<) [ADD_2RR] [RET 8] [MOD_2RR] [RET 400] [RET SQ]               
+[HALT] [HALT] [HALT] [HALT] [RET LI]       [HALT]         [QRY_UR]--[QRY_U3U]     [RET LI]        [HALT]         [QRY_UR]--[QRY_U3U]  [MOD_R2R]---------[RET RE]-[RET 240]     [HALT] [HALT]    [QRY_R3U]--[QRY_UR]--[<MOVT_R ST] [ADD_R]  [ADD_R2R] [RET 8000] [MUL_R2R] [RET 24] [RET 512]              
+
+
+Initialization----------------------                               24 is size of the struct
+[QRY_DR] [QRY_R3R]    [<MOVT_R HE]   [RET 1]     [<MOVT_R *HE] [RET 2]                  
+[QRY_DR] [>MOVT_R ST] [QRY_DR]   [QNZ_2D LI] [<MOVT_R SQ] [MUL_R2R]  [RET LI] [RET 24] [QRY_R2D] [>INC_R HE] [<MOVT_R SQ] [ADD_2RR] [RET 4]   [RET SQ] [HALT] [HALT]
+[RET 8000] [RET 512] [<MOVT_L LI]   [>DEC_R LI] [QRY_UR] [QRY_R3R]  [<MOVT_R HE] [RET 2] [QRY_RU] [<MOVT_R *HE] [RET *(ST+SQ)] [HALT]  [HALT] [HALT]
+mem_start, num of organisms                                                            LCD - X     V - LCD Y   RED is a start. V - add type to HE - change color  (change to ADD_RU)
+[HALT] [HALT] [<MOVT_3U *HE] [QRY_UL] [HALT]   [HALT] [HALT]  [HALT] [QRY_2DR] [QRY_2UD] [ADD_R2R] [RET HE] [AND_RD] [RET *(ST+SQ)] [HALT] [HALT]
+[HALT] [HALT] [HALT]   [HALT] [HALT]   [HALT] [HALT]  [RET 255] [<MOVT_L *HE] [QRY_RL] [<MOVT_U HE] [HALT] [RET 3] [HALT] [HALT] [HALT]
+[HALT] [HALT] [HALT]   [HALT] [HALT]   [HALT] [HALT]  [HALT] [QRY_R] [QRY_3U] [HALT] [HALT] [HALT] [HALT] [HALT] [HALT]
+
+  
+       
+<ENDBLOCK>

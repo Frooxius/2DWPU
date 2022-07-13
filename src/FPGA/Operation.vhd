@@ -52,7 +52,7 @@ begin
 			when opALU_DIV =>
 				result <= STD_LOGIC_VECTOR(unsigned(operandA) / unsigned(operandB));
 			when opALU_MOD =>
-				result <= STD_LOGIC_VECTOR(signed(operandA) mod signed(operandB));
+				result <= STD_LOGIC_VECTOR(unsigned(operandA) mod unsigned(operandB));
 			when opALU_AND =>
 				result <= operandA and operandB;
 			when opALU_OR =>

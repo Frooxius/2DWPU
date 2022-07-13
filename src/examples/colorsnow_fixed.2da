@@ -1,0 +1,16 @@
+block ColorSnow
+
+Initialization---------------------- 
+[QRY_RD]    [<MOVT_R RE] [RET 60000]
+[QNZ_D RE]
+[QRY_DR]  [<MOVT_R RE] [SUB_R2R]   [RET RE]  [RET 1]                                    24 is size of the struct
+[QRY_DR] [QRY_R3R]    [<MOVT_R HE]   [RET 1]     [<MOVT_R *HE] [RET 2]                  
+[QRY_DR] [>MOVT_R ST] [QRY_DR]   [QNZ_2D LI] [<MOVT_R SQ] [MUL_R2R]  [RET LI] [RET 24] [QRY_R2D] [>INC_R HE] [<MOVT_R SQ] [ADD_2RR] [RET 4]   [RET SQ] [HALT] [HALT]
+[RET 6000] [RET 2048] [<MOVT_L LI]   [>DEC_R LI] [QRY_UR] [QRY_R3R]  [<MOVT_R HE] [RET 2] [QRY_RU] [<MOVT_R *HE] [DIV_R2R] [RET *(ST+SQ)] [RET RE]    [HALT] [HALT] [HALT]
+mem_start, num of items                                                            LCD - X     V - LCD Y   RED is a start. V - add type to HE - change color  (change to ADD_RU)
+[HALT] [HALT] [<MOVT_3U *HE] [QRY_UL] [HALT]   [HALT] [HALT]  [HALT] [QRY_2DR] [QRY_2UD] [ADD_R2R] [RET HE] [AND_RD] [RET *(ST+SQ)] [HALT] [HALT]
+[HALT] [HALT] [HALT]   [HALT] [HALT]   [HALT] [HALT]  [RET *(ST+SQ)] [<MOVT_L *HE] [QRY_RL] [<MOVT_U HE] [HALT] [RET 3] [HALT] [HALT] [HALT]
+[HALT] [HALT] [HALT]   [HALT] [HALT]   [HALT] [HALT]  [HALT] [QRY_R] [QRY_3U] [HALT] [HALT] [HALT] [HALT] [HALT] [HALT]
+   
+       
+<ENDBLOCK>
