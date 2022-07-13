@@ -94,8 +94,10 @@
     <ClInclude Include="2DWPUconfig.h" />
     <ClInclude Include="Analys2DWPUcore.h" />
     <ClInclude Include="CoreInfoHolders.h" />
+    <ClInclude Include="IOcount.h" />
     <ClInclude Include="IOdevice.h" />
     <ClInclude Include="IOinterface.h" />
+    <ClInclude Include="IOmemmgr.h" />
     <ClInclude Include="IOrandgen.h" />
     <ClInclude Include="Registers.h" />
     <ClInclude Include="Simple2DWPU.h" />

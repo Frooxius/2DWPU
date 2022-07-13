@@ -5,6 +5,8 @@
 #include <qtimer.h>
 #include <qgraphicsscene.h>
 #include <qthread.h>
+#include <qinputdialog.h>
+#include <qfiledialog.h>
 
 #include "ui_gui_2dwpu.h"
 #include "simplelcd.h"
@@ -45,10 +47,32 @@ public slots:
 	void SimReset();
 	void SimSetCores(uint cores);
 
+	void StatRun();
+
+	void SimSetBreakpoint();
+	void SimClearBreakpoints();
+
 	void ConfigureCoreNumber();
 
 	// Opening and saving stuff
 	void Open2DASM();
+
+	// TEMP
+	void DispMemArea()
+	{
+		int base = QInputDialog::getInt(this, "", "", 0, 0);
+		QImage img(ram->data+base, 416, 256, QImage::Format_RGB32);
+		win_SimpleLCD->Draw(&img);
+	}
+	void StatSimpleLCDSave()
+	{
+		if(ui.actionSimpleLCD_Save->isChecked())
+			win_SimpleLCD->SaveStart(
+				QFileDialog::getExistingDirectory());
+		else
+			win_SimpleLCD->SaveStop();
+	}
+		// ENDTEMP
 
 private:
 	Ui::GUI_2DWPUClass ui;
@@ -64,6 +88,9 @@ private:
 	ProgramBlockViewData programBlockView;
 	void UpdateProgramBlockView(bool force_full);
 	void DecodeProgramBlockTable();
+
+	// Statistics
+	void UpdateStats();
 
 	// Other dialogs
 	BasicInstructionSetAnalyzer *win_BasicInstructionSetAnalyzer;

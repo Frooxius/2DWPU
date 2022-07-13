@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1039</width>
-    <height>589</height>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>60</y>
-      <width>531</width>
-      <height>441</height>
+      <width>781</width>
+      <height>521</height>
      </rect>
     </property>
     <property name="font">
@@ -65,7 +65,7 @@ selection-background-color: rgb(85, 255, 0);</string>
      <bool>false</bool>
     </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>70</number>
+     <number>100</number>
     </attribute>
     <attribute name="verticalHeaderDefaultSectionSize">
      <number>15</number>
@@ -136,14 +136,14 @@ selection-background-color: rgb(85, 255, 0);</string>
     <column/>
     <item row="0" column="0">
      <property name="text">
-      <string>Test</string>
+      <string>[RET *(ST+SQ)]</string>
      </property>
     </item>
    </widget>
    <widget class="QPushButton" name="BsimStep">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>85</x>
       <y>20</y>
       <width>51</width>
       <height>23</height>
@@ -156,10 +156,10 @@ selection-background-color: rgb(85, 255, 0);</string>
    <widget class="QTextBrowser" name="coresInfoT">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>780</x>
       <y>60</y>
       <width>256</width>
-      <height>441</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="font">
@@ -171,7 +171,7 @@ selection-background-color: rgb(85, 255, 0);</string>
    <widget class="QPushButton" name="BsimStop">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>145</x>
       <y>20</y>
       <width>51</width>
       <height>23</height>
@@ -184,7 +184,7 @@ selection-background-color: rgb(85, 255, 0);</string>
    <widget class="QPushButton" name="BsimMax">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>265</x>
       <y>20</y>
       <width>51</width>
       <height>23</height>
@@ -197,9 +197,9 @@ selection-background-color: rgb(85, 255, 0);</string>
    <widget class="QLCDNumber" name="frequencyL">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>779</x>
       <y>10</y>
-      <width>261</width>
+      <width>256</width>
       <height>41</height>
      </rect>
     </property>
@@ -225,14 +225,142 @@ selection-background-color: rgb(85, 255, 0);</string>
    <widget class="QPushButton" name="Bsim30Hz">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>205</x>
       <y>20</y>
       <width>51</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>30 Hz</string>
+     <string>5 Hz</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="statsT">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>580</y>
+      <width>781</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lucida Console</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="stepsS">
+    <property name="geometry">
+     <rect>
+      <x>36</x>
+      <y>20</y>
+      <width>46</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>1000000</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BsetBreakpoint">
+    <property name="geometry">
+     <rect>
+      <x>475</x>
+      <y>20</y>
+      <width>86</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Set Breakpoint</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BclearBreakpoints">
+    <property name="geometry">
+     <rect>
+      <x>565</x>
+      <y>20</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear Breakpoints</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="statSampleRateS">
+    <property name="geometry">
+     <rect>
+      <x>925</x>
+      <y>590</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>10000000</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="statSamplesS">
+    <property name="geometry">
+     <rect>
+      <x>925</x>
+      <y>615</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>10000000</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="statRunB">
+    <property name="geometry">
+     <rect>
+      <x>929</x>
+      <y>640</y>
+      <width>106</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Run Statistics</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>595</y>
+      <width>66</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sample rate:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>620</y>
+      <width>71</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Samples:</string>
     </property>
    </widget>
   </widget>
@@ -276,7 +404,9 @@ selection-background-color: rgb(85, 255, 0);</string>
     <property name="title">
      <string>IO interface</string>
     </property>
+    <addaction name="actionSimpleLCD_Disp_Mem_TEMP"/>
     <addaction name="actionSimpleLCD_400x240"/>
+    <addaction name="actionSimpleLCD_Save"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
@@ -320,9 +450,27 @@ selection-background-color: rgb(85, 255, 0);</string>
     <string>Set Cores</string>
    </property>
   </action>
+  <action name="actionDisplay_Memory_4bit">
+   <property name="text">
+    <string>Display Memory (4B)</string>
+   </property>
+  </action>
+  <action name="actionSimpleLCD_Disp_Mem_TEMP">
+   <property name="text">
+    <string>SimpleLCD Disp Mem (TEMP)</string>
+   </property>
+  </action>
   <action name="actionSimpleLCD_400x240">
    <property name="text">
     <string>SimpleLCD (400x240)</string>
+   </property>
+  </action>
+  <action name="actionSimpleLCD_Save">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>SimpleLCD Save</string>
    </property>
   </action>
  </widget>

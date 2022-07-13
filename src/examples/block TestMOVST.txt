@@ -1,0 +1,7 @@
+block TestMOVST
+[QRY_RD] [RET 1023]
+[QRY_RD] [TAK *ST ]
+[QRY_RD] [|MOVF *ST]
+[QRY_DR] [TAK SQ]
+[<MOVT_R *ST] [ADD_R] [RET 2]
+<ENDBLOCK>

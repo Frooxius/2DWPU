@@ -451,3 +451,13 @@ compile_commands.json
 *creator.user*
 
 *_qmlcache.qrc
+
+# VHDL
+*.cdb
+*.db_info
+*.rcfdb
+*.hdb
+*.kpt
+*.bak
+incremental_db/
+modelsim/

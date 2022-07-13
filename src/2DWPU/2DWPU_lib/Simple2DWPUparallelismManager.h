@@ -32,11 +32,13 @@ namespace WPU2D
 			uint ncores;	// number of the managed cores
 			ParCoreInfo *coreinfo;
 
+			CoreStats *stats;
+
 			void AssignTask(uint coreid);
 			void GiveResult(uint coreid);
 
 		public:
-			Simple2DWPU_PM( Simple2DWPUcore **cores, uint ncores );
+			Simple2DWPU_PM( Simple2DWPUcore **cores, uint ncores, CoreStats *stats);
 
 			void Cycle();
 			void Reset();

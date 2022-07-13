@@ -1,12 +1,19 @@
 #pragma once
 #include "Global.h"
+#include <string>
 
 
 // Very basic exception
 class Exception
 {
-	const char *msg;	// the message
+	std::string msg;	// the message
 	uint code;	// error message code
+
+protected:
+	void Append(std::string app)
+	{
+		msg += app;
+	}
 
 public:
 	Exception(const char *msg, uint code)
@@ -16,7 +23,7 @@ public:
 	}
 
 	uint GetCode() { return code; }
-	const char *GetMsg() { return msg; }
+	const char *GetMsg() { return msg.c_str(); }
 };
 
 // Stack exception

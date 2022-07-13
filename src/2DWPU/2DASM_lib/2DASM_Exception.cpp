@@ -14,6 +14,11 @@ namespace WPU2D
 			"Unexpected end of file",
 
 			"Syntax error: Unknown RET instruction",
+			"Syntax error: Illegal query length",
+			"Syntax error: Illegal operand",
+			"Syntax error: Unknown execution time symbol",
+
+			"Only one direction can have query length longer than 1",
 			"Index table is full"
 		};
 	}

@@ -1,5 +1,5 @@
 block simpleLCDtest
-[QRY_RD]    [<MOVT_R LI] [RET 128]
+[QRY_RD]    [<MOVT_R LI] [RET 2048]
 [QNZ_DR LI] [<MOVT_R *HE][RET 2]
 [<DEC_D LI]
 [QRY_RD] [<MOVT_R HE] [RET 7]

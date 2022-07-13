@@ -1,0 +1,6 @@
+static block testRet
+[QRY_RD] [RET 8]
+[QRY_RD] [TAK *(ST+0)]
+[QRY_RD] [RET *(ST+0)]
+[RET 0]
+<ENDBLOCK>

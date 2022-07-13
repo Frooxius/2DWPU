@@ -8,7 +8,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define DEBUG_ALLPUBLIC public:
+#define DEBUG_ALLPUBLIC
 
 typedef unsigned char byte;
 typedef unsigned long long ull;
@@ -53,6 +53,15 @@ template <typename X> std::string ToStringHEX(X i, int minwidth)
     std::stringstream ss;
 	ss << std::hex << std::setfill('0') << std::setw(minwidth) << i;
 	return ss.str();
+}
+
+template <typename X> X FromHEXString(std::string str)
+{
+	X val;
+	std::stringstream ss;
+	ss << std::hex << str;
+	ss >> val;
+	return val;
 }
 
 inline std::string substrBetween(std::string str, int from, int to)
@@ -175,6 +184,7 @@ class reg5
 
 public:
 	reg5() { data = 0; }
+	reg5(uint data) { this->data = data&0x1FU; } 
 
 	reg16 operator=(uint newval)
 	{

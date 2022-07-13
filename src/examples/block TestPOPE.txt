@@ -1,0 +1,6 @@
+block TestPOPE
+[QRY_RD] [<MOVT_R PO] [RET -1]
+[ADD_RD] [RET PO]
+[QRY_RD] [<MOVT_R PE] [RET PO]
+[RET PE]
+<ENDBLOCK>

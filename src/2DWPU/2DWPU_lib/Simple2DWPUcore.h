@@ -16,6 +16,9 @@ namespace WPU2D
 		{
 			DEBUG_ALLPUBLIC
 
+			// Statistics
+			CoreStats *stats;
+
 			// Required memories foinsBaseOperationr operation
 			Memory *RAM;
 			MemoryStack<byte> *instr_stack;
@@ -44,7 +47,9 @@ namespace WPU2D
 			void ptrRAM(reg32 addr, reg8 val);
 			
 			// Indirect memory access trough registers
+		public:
 			reg32 ptrST32(reg32 add)   { return ptrRAM(globreg->ST+add); }
+		private:
 			reg16 ptrST16(reg32 add)  { return (reg16)ptrRAM(globreg->ST+add); }
 			reg8  ptrST8 (reg32 add)  { return (reg8)ptrRAM(globreg->ST+add); }
 
@@ -83,6 +88,7 @@ namespace WPU2D
 			void PasstroughSTACKReg(uint regid, reg32 val);
 
 			reg32 ReturnRegister(uint regid);
+			void TakeRegister(uint regid, reg32 val);
 
 			// Holds info about the current program block
 			ProgramBlockInfo pblock;
@@ -101,12 +107,12 @@ namespace WPU2D
 			void ArgStackReset();
 
 			// Executing instructions
-			void ExecuteInstruction(DecodedInstr instr);
+			bool ExecuteInstruction(DecodedInstr instr);
 
 			/*  ********************************
 						Emulation flow
 				*******************************/
-			void InternCycle();	// perform one cycle
+			bool InternCycle();	// perform one cycle
 
 			void FlowReturn() { FlowReturn(reg.ARG); }
 			void FlowReturn(reg32 val);
@@ -143,20 +149,22 @@ namespace WPU2D
 			{
 				regPC parPC;
 				bool rqst, free, take, redy;
-				reg16 parARG;
+				reg32 parARG;
+				reg32 PO, PE;
 			} parallel;
 
 			// Initialization
 			void Initialize(Memory *RAM, IOinterface *io,
 				uint instr_stack_size, uint arg_stack_size,
-				bool secondary, GlobalRegisters *globreg);
+				bool secondary, GlobalRegisters *globreg, CoreStats *stats);
 						
 		public:
 			// Constructors
-			Simple2DWPUcore(Memory *RAM, IOinterface *io, bool secondary, GlobalRegisters *globreg);	// default stacks size
+			Simple2DWPUcore(Memory *RAM, IOinterface *io, bool secondary,
+				GlobalRegisters *globreg, CoreStats *stats);	// default stacks size
 			Simple2DWPUcore(Memory *RAM, IOinterface *io,
 				uint instr_stack_size, uint arg_stack_size,
-				bool secondary, GlobalRegisters *globreg);
+				bool secondary, GlobalRegisters *globreg, CoreStats *stats);
 
 			void Activate(bool activate) { reg.P_SW.AC(activate); }
 
@@ -168,6 +176,8 @@ namespace WPU2D
 			bool C_RQST() { return parallel.rqst; }
 			regPC C_PC()  { return parallel.parPC; }
 			reg32 C_ARG() { return parallel.parARG; }
+			reg32 C_PO() { return parallel.PO; }
+			reg32 C_PE() { return parallel.PE; }
 
 			// Paralelism input
 			void C_REDY(bool set) { parallel.redy = set; }
@@ -177,7 +187,7 @@ namespace WPU2D
 			void C_ARG(reg32 set)  { parallel.parARG = set; }
 
 			// performs a single cycle of the individual core
-			void Cycle() { InternCycle(); }
+			bool Cycle() { return InternCycle(); }
 
 			void Reset();
 

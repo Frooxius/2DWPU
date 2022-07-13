@@ -69,6 +69,12 @@
     <ClInclude Include="IOrandgen.h">
       <Filter>Header Files\IOdevices</Filter>
     </ClInclude>
+    <ClInclude Include="IOcount.h">
+      <Filter>Header Files\IOdevices</Filter>
+    </ClInclude>
+    <ClInclude Include="IOmemmgr.h">
+      <Filter>Header Files\IOdevices</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DWPU.cpp">

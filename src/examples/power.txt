@@ -1,7 +1,7 @@
 static block Power
 [QRY_RD]     [<MOVT_R LI] [RET 32]
-[<MOVT_D SQ]
-[QNZ_R LI]   [ADD_RD]     [MUL_RR] [RET LI]
+[QRY_DR]     [>MOVT_R SQ] [HALT]
+[QNZ_R LI]   [ADD_DR]     [MUL_RR] [RET LI]
 [QRY_U]      [>DEC_L LI]
 <ENDBLOCK>
              

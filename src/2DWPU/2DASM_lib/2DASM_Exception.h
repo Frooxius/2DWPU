@@ -25,12 +25,15 @@ namespace WPU2D
 
 		extern char *StrASM2D_Exception[];
 
-		class ASM2D_Exception : private Exception
+		class ASM2D_Exception : protected Exception
 		{
 		public:
-			ASM2D_Exception(eASM2D_Exception exception) : 
+			ASM2D_Exception(eASM2D_Exception exception, std::string append = "") : 
 			  Exception(StrASM2D_Exception[(uint)exception], (uint)exception)
-			{	}
+			  {
+				  if(append.length())
+					Append(append);
+			  }
 
 			  eASM2D_Exception GetCode() { 
 				  return (eASM2D_Exception)Exception::GetCode(); }

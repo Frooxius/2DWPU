@@ -8,30 +8,31 @@ namespace WPU2D
 	namespace Core
 	{
 		Simple2DWPUcore::Simple2DWPUcore(Memory *RAM, IOinterface *io, bool secondary,
-			GlobalRegisters *globreg)
+			GlobalRegisters *globreg, CoreStats *stats)
 		{
 			Initialize(RAM, io, DEFAULT_INSTR_STACK_SIZE,
 				DEFAULT_ARG_STACK_SIZE,
-				secondary, globreg);
+				secondary, globreg, stats);
 		}
 
 		Simple2DWPUcore::Simple2DWPUcore(Memory *RAM, IOinterface *io,
 				uint instr_stack_size, uint arg_stack_size,
-				bool secondary, GlobalRegisters *globreg)
+				bool secondary, GlobalRegisters *globreg, CoreStats *stats)
 		{
-			Initialize(RAM, io, instr_stack_size, arg_stack_size, secondary, globreg);
+			Initialize(RAM, io, instr_stack_size, arg_stack_size, secondary, globreg, stats);
 		}
 
 		// Constructor initializes the core
 		void Simple2DWPUcore::Initialize(Memory *RAM, IOinterface *io,
 				uint instr_stack_size, uint arg_stack_size,
-				bool secondary, GlobalRegisters *globreg)
+				bool secondary, GlobalRegisters *globreg, CoreStats *stats)
 		{
 			this->RAM = RAM;
 			this->io = io;
 			instr_stack = new MemoryStack<byte>(instr_stack_size);
 			arg_stack = new MemoryStack<reg32>(arg_stack_size);
 			this->globreg = globreg;
+			this->stats = stats;
 
 			Reset();
 
@@ -167,14 +168,19 @@ namespace WPU2D
 		}
 
 		// One cycle of the core
-		void Simple2DWPUcore::InternCycle()
+		bool Simple2DWPUcore::InternCycle()
 		{
 			CheckParallelInvoke();
 
 			parallel.rqst = false;	// drop it
 
 			if(reg.P_SW.AC())
-				ExecuteInstruction(DecodedInstr(fetch_instr));
+			{
+				stats->instructions++;
+				return ExecuteInstruction(DecodedInstr(fetch_instr));
+			}
+
+			return true;
 		}
 
 		void Simple2DWPUcore::CheckParallelInvoke()
@@ -217,11 +223,17 @@ namespace WPU2D
 
 		void Simple2DWPUcore::FlowQuery()
 		{
+			// stats
+			stats->queries++;
+
 			reg.IS = 0;	// clean it for the next instruction
 		}
 
 		void Simple2DWPUcore::FlowReturn(reg32 val)
 		{
+			// stats
+			stats->returns++;
+
 			try
 			{
 				reg.ARG = val;
@@ -242,6 +254,7 @@ namespace WPU2D
 						Activate(false);
 						parallel.parARG = reg.ARG;	// the result
 						parallel.free = true;
+						stats->instructions++;
 						Reset();
 					}
 					else
@@ -268,11 +281,14 @@ namespace WPU2D
 				+ addr.yPC*PROGRAM_BLOCK_HEIGHT*INSTRUCTION_WIDTH);
 		}
 
-		void Simple2DWPUcore::ExecuteInstruction(DecodedInstr instr)
+		bool Simple2DWPUcore::ExecuteInstruction(DecodedInstr instr)
 		{
 			// following are used inside the switch, but can't be delacred inside it (compilation error)
 			reg64 data;
 			regPC newPC;
+
+			if(instr.halt)
+				return false;
 
 			switch(instr.baseType)
 			{
@@ -318,6 +334,8 @@ namespace WPU2D
 				// TODO exception!
 				break;
 			}
+
+			return true;
 		}
 
 		void Simple2DWPUcore::ProgramBlockJump(regPC destination)
@@ -420,17 +438,18 @@ namespace WPU2D
 				switch(reg.IS)
 				{
 				case 0:
-					if(QueryCondition((byte)instr.index))
-						FlowQuery(instr.DecodeDirection(false));
+					if(instr.SingleDirection())
+					{
+						if(QueryCondition((byte)instr.index))
+							FlowQuery(instr.DecodeDirection(false));
+						else
+							FlowReturn();
+					}
 					else
 					{
-						if(instr.SingleDirection())
-							FlowReturn();
-						else
-						{
-							reg.IS = 1;
-							FlowQuery(instr.DecodeDirection(true));
-						}
+						reg.IS = 1;
+						FlowQuery(instr.DecodeDirection(
+							!QueryCondition((byte)instr.index) ));
 					}
 					break;
 				case 1:
@@ -463,6 +482,8 @@ namespace WPU2D
 					// parallelism
 					parallel.rqst = true;
 					parallel.parARG = reg.ARG;
+					parallel.PO = reg.PO;
+					parallel.PE = reg.PE;
 					// move the other way
 					parallel.parPC = reg.PC;
 					parallel.parPC.Move(ProcessDir(instr.DecodeDirection(true)));
@@ -484,6 +505,8 @@ namespace WPU2D
 					if(parallel.redy)
 						// but only if the data are ready
 						FlowReturn( Operation(reg.ARG, parallel.parARG, (byte)instr.index) );
+					else
+						stats->instructions--;	// just waiting... not processed
 				}
 				break;
 
@@ -515,6 +538,8 @@ namespace WPU2D
 				reg.PE = (reg32)(r >> 32);
 				return (reg32)r;
 			case DIV:
+				if(!b)
+					return 0xFFFFFFFFU;
 				return a/b;
 			case MOD:
 				return a%b;
@@ -525,7 +550,7 @@ namespace WPU2D
 			case XOR:
 				return a^b;
 			case NOT:
-				return ~a;
+				return ~b;
 			case LAND:
 				return a&&b;
 			case LOR:
@@ -533,7 +558,7 @@ namespace WPU2D
 			case LXOR:
 				return (a!=0)^(b!=0);
 			case LNOT:
-				return !a;
+				return !b;
 			case RL:
 				return rotate(a, b);
 			case RR:
@@ -550,6 +575,10 @@ namespace WPU2D
 				return min((int)a, (int)b);
 			case SMAX:
 				return max((int)a, (int)b);
+			case SDIV:
+				return (reg32)((int)a/(int)b);
+			case SMUL:
+				return (reg32)((int)a*(int)b);
 
 				// FPU
 			case FADD:
@@ -563,29 +592,29 @@ namespace WPU2D
 			case FSQR:
 				return UINT(FLOAT(a)*FLOAT(a));
 			case FSQRT:
-				return UINT(sqrt(FLOAT(a)));
+				return UINT(sqrt(FLOAT(b)));
 			case FPOW:
 				return UINT(pow(FLOAT(a), FLOAT(b)));
 			case FROOT:
 				return UINT(pow(FLOAT(a), 1.0f/FLOAT(b)));
 			case FSIN:
-				return UINT(sin(FLOAT(a)));
+				return UINT(sin(FLOAT(b)));
 			case FCOS:
-				return UINT(cos(FLOAT(a)));
+				return UINT(cos(FLOAT(b)));
 			case FTAN:
-				return UINT(tan(FLOAT(a)));
+				return UINT(tan(FLOAT(b)));
 			case FLOG2:
-				return UINT(logN(FLOAT(a), 2.0f));
+				return UINT(logN(FLOAT(b), 2.0f));
 			case FLOG10:
-				return UINT(log10(FLOAT(a)));
+				return UINT(log10(FLOAT(b)));
 			case FLN:
-				return UINT(log(FLOAT(a)));
+				return UINT(log(FLOAT(b)));
 			case FABS:
-				return UINT(abs(FLOAT(a)));
+				return UINT(abs(FLOAT(b)));
 			case FTOINT:
-				return (int)FLOAT(a);
+				return (int)FLOAT(b);
 			case FFROMINT:
-				return UINT((float)a);
+				return UINT((float)b);
 			case FMIN:
 				return UINT(min(FLOAT(a), FLOAT(b)));
 			case FMAX:
@@ -969,7 +998,13 @@ namespace WPU2D
 			switch(instr.indexSubtype.returnType)
 			{
 			case insIndexRetRegister:
-				FlowReturn(ReturnRegister(instr.index));
+				if(!instr.retTAK)
+					FlowReturn(ReturnRegister(instr.index));
+				else
+				{
+					TakeRegister(instr.index, reg.ARG);
+					FlowReturn();
+				}					
 				break;
 			case insIndexRetValue:
 				FlowReturn(IndexTable(instr.index));
@@ -1075,9 +1110,110 @@ namespace WPU2D
 			if(Between(regid, (uint)RET8_ptrHE, (uint)RET8_ptrHE_PO))
 				return ptrHE8(ReturnRegister(regid - RET8_ptrHE - 1));
 
+			// Returning ST+offset
+			if(Between(regid, (uint)RET_ptrST_m128, (uint)RET_ptrST_p128))
+				return ptrST32( (regid-RET_ptrST_m128) - 128 );
+
 			// make compiler happy
 			return 0;
 		}
+
+		/* TODO - redo this, it's a copy or ReturnRegister */
+		void Simple2DWPUcore::TakeRegister(uint regid, reg32 val)
+		{
+			if(Between(regid, (uint)RET_LI, (uint)RET_TF3))
+				switch(regid)
+			{
+				case RET_LI:
+					globreg->LI = val; break;
+				case RET_SQ:
+					globreg->SQ = val; break;
+				case RET_RE:
+					globreg->RE = val; break;
+				case RET_TR:
+					globreg->TR = val; break;
+				case RET_CI:
+					globreg->CI = val; break;
+				case RET_PE:
+					reg.PE = val; break;
+				case RET_HE:
+					globreg->HE = val; break;
+				case RET_ST:
+					globreg->ST = val; break;
+				case RET_EL:
+					globreg->EL = val; break;
+				case RET_PO:
+					reg.PO = val; break;
+				case RET_IC:
+					globreg->IC = val; break;
+				case RET_IB:
+					// TODO
+				case RET_SW:
+					SW(val);
+				case RET_BS:
+					reg.PC.BS = val;
+					ProgramBlockJump(reg.PC);
+					break;
+				case RET_SI:
+					SI(val); break;
+				case RET_SA:
+					SA(val); break;
+				case RET_TC:
+					globreg->TC = val; break;
+				case RET_TV0:
+					globreg->TV[0] = val; break;
+				case RET_TV1:
+					globreg->TV[1] = val; break;
+				case RET_TV2:
+					globreg->TV[2] = val; break;
+				case RET_TV3:
+					globreg->TV[3] = val; break;
+				case RET_TF0:
+					globreg->TF[0] = val; break;
+				case RET_TF1:
+					globreg->TF[1] = val; break;
+				case RET_TF2:
+					globreg->TF[2] = val; break;
+				case RET_TF3:
+					globreg->TF[3] = val; break;
+			}
+
+			/*
+				The minus one is so this function is called with
+				-1 if it's the first option is indirect addressing
+				without any increment - this function returns 0 when
+				called with -1
+			*/
+
+			// 32 bit
+
+			if(Between(regid, (uint)RET_ptrST, (uint)RET_ptrST_PO))
+				ptrST32(val, ReturnRegister(regid - RET_ptrST - 1));
+
+			if(Between(regid, (uint)RET_ptrHE, (uint)RET_ptrHE_PO))
+				ptrHE16(val, ReturnRegister(regid - RET_ptrHE - 1));
+
+			// 16 bit
+
+			if(Between(regid, (uint)RET16_ptrST, (uint)RET16_ptrST_PO))
+				ptrST16(val, ReturnRegister(regid - RET16_ptrST - 1));
+
+			if(Between(regid, (uint)RET16_ptrHE, (uint)RET16_ptrHE_PO))
+				ptrHE16(val, ReturnRegister(regid - RET16_ptrHE - 1));
+
+			// 8 bit
+
+			if(Between(regid, (uint)RET8_ptrST, (uint)RET8_ptrST_PO))
+				ptrST8(val, ReturnRegister(regid - RET8_ptrST - 1));
+
+			if(Between(regid, (uint)RET8_ptrHE, (uint)RET8_ptrHE_PO))
+				ptrHE8(val, ReturnRegister(regid - RET8_ptrHE - 1));
+
+			// Returning ST+offset
+			if(Between(regid, (uint)RET_ptrST_m128, (uint)RET_ptrST_p128))
+				ptrST32(val, (regid-RET_ptrST_m128) - 128 );
+		}
+
 
 		void Simple2DWPUcore::PerformDouble(DecodedInstr instr)
 		{
@@ -1294,6 +1430,8 @@ namespace WPU2D
 
 		reg32 Simple2DWPUcore::ptrRAM(reg32 addr)
 		{
+			stats->memreads++;
+
 			if(addr > (RAM->size - sizeof(reg32)))
 				return 0;
 
@@ -1302,6 +1440,8 @@ namespace WPU2D
 
 		void Simple2DWPUcore::ptrRAM(reg32 addr, reg32 val)
 		{
+			stats->memwrites++;
+
 			if(addr > (RAM->size - sizeof(reg32)))
 				return;
 
@@ -1310,6 +1450,8 @@ namespace WPU2D
 
 		void Simple2DWPUcore::ptrRAM(reg32 addr, reg16 val)
 		{
+			stats->memwrites++;
+
 			if(addr > (RAM->size - sizeof(reg32)))
 				return;
 
@@ -1318,6 +1460,8 @@ namespace WPU2D
 
 		void Simple2DWPUcore::ptrRAM(reg32 addr, reg8 val)
 		{
+			stats->memwrites++;
+
 			if(addr > (RAM->size - sizeof(reg32)))
 				return;
 
@@ -1371,21 +1515,25 @@ namespace WPU2D
 
 		reg16 Simple2DWPUcore::ptrIO16(reg16 addr)
 		{
+			stats->ioreads++;
 			return io->Read16(addr);
 		}
 
 		reg8 Simple2DWPUcore::ptrIO8(reg16 addr)
 		{
+			stats->ioreads++;
 			return io->Read8(addr);
 		}
 
 		void Simple2DWPUcore::ptrIO(reg16 addr, reg16 val)
 		{
-			return io->Write16(val, addr);
+			stats->iowrites++;
+			io->Write16(val, addr);
 		}
 
 		void Simple2DWPUcore::ptrIO(reg16 addr, reg8 val)
 		{
+			stats->iowrites++;
 			return io->Write8(val, addr);
 		}
 

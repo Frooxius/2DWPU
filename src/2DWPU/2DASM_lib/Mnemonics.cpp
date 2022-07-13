@@ -11,6 +11,12 @@ namespace WPU2D
 			// make empty instruction first
 			instr = DecodedInstr();
 
+			if(mnemonic.find("HALT") != mnemonic.npos)
+			{
+				instr.halt = true;
+				return;
+			}
+
 			std::string base, direction, operand;
 			DecomposeMnemonic(mnemonic, &base, &direction, &operand);
 
@@ -59,20 +65,20 @@ namespace WPU2D
 
 					if(val | io | mem)
 						// determine the index for these three - value is in the index table
-						instr.index = FromString<ushort>(
+						instr.index = FromHEXString<ushort>(
 							operand.substr(operand.find("@")+1, operand.npos));
 					else
 					{
 						instr.index = -1;
-						for(int i = 0; i < RET8_ptrHE_PO; ++i)
-							if( GetReturnRegBaseName(i) == base &&
+						for(int i = 0; i < RET_TERMINATOR; ++i)
+							if( GetReturnRegBaseName(i, instr.retTAK) == base &&
 								ComposeReturnRegister(i) == operand)
 							{
 								instr.index = i;
 								break;
 							}
 						if(instr.index == -1)
-							throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND); 
+							throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, mnemonic); 
 					}
 					break;
 
@@ -95,6 +101,13 @@ namespace WPU2D
 			{
 				instr.baseType = insBaseIndex;
 				instr.indexType = insIndexReturn;
+				return;
+			}
+			if((base.find("TAK") != base.npos))
+			{
+				instr.baseType = insBaseIndex;
+				instr.indexType = insIndexReturn;
+				instr.retTAK = true;
 				return;
 			}
 			if(base.find("JMP") != base.npos)
@@ -151,7 +164,7 @@ namespace WPU2D
 
 			// if it doesn't match anything, it's not a known instruction
 	
-			throw ASM2D_Exception(ERR_ASM2D_UNKNOWN_INSTRUCTION);
+			throw ASM2D_Exception(ERR_ASM2D_UNKNOWN_INSTRUCTION, "\n" + base);
 		}
 
 		void Mnemonic::DecodeIndexReturnSubtype(std::string ins,
@@ -163,15 +176,21 @@ namespace WPU2D
 					// skip spaces
 					if(isspace(ins[i]))
 						continue;
+					// skip minus symbol
+					if(ins[i] == '-')
+						continue;
+					// plus is okay too
+					if(ins[i] == '+')
+						continue;
 					// skip this as well
 					if(ins[i] == '@')
 						continue;
 					// must be all digits
-					if(!isdigit(ins[i]))
+					if(!isxdigit(ins[i]))
 						*val = false;
 				}
-				*mem = ins.find("*") != ins.npos;
-				*io = ins.find("#") != ins.npos;
+				*mem = (ins.find("*") != ins.npos) && (ins.find("*(") == ins.npos);
+				*io = (ins.find("#") != ins.npos) && (ins.find("#(") == ins.npos);
 		}
 
 		void Mnemonic::DecomposeMnemonic(
@@ -180,6 +199,8 @@ namespace WPU2D
 				std::string *direction,
 				std::string *operand)
 		{
+			std::string temp_operand;
+
 			// first, get the base
 			if(mnemonic.find("_") == mnemonic.npos)
 				*base = substrBetween(mnemonic, 0, mnemonic.find(' '));
@@ -192,8 +213,14 @@ namespace WPU2D
 			}
 
 			if(mnemonic.find(' ') != mnemonic.npos)
-				*operand = substrBetween(mnemonic, mnemonic.find(" ")+1,
+				temp_operand = substrBetween(mnemonic, mnemonic.find(" ")+1,
 					mnemonic.npos);
+
+			// strip all spaces from the operand
+			*operand = "";
+			for(int i = 0; i < temp_operand.length(); ++i)
+				if(!isspace(temp_operand[i]))
+					*operand += temp_operand[i];
 		}
 
 		void Mnemonic::DecodeDirection(std::string direction)
@@ -254,7 +281,7 @@ namespace WPU2D
 				for(int i = 0; PasstroughMOVRegisters[i]; ++i)
 					if(operand == PasstroughMOVRegisters[i])
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			if( Between(index, (reg16)PUSH_ARG, (reg16)PUSH_ptrST) ||
@@ -263,7 +290,7 @@ namespace WPU2D
 				for(int i = 0; PasstroughSTACKRegisters[i]; ++i)
 					if(operand == PasstroughSTACKRegisters[i])
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			if( Between(index, (reg16)INC_ARG, (reg16)INC_PO) ||
@@ -272,7 +299,7 @@ namespace WPU2D
 				for(int i = 0; PasstroughINCDECRegisters[i]; ++i)
 					if(operand == PasstroughINCDECRegisters[i])
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			if( Between(index, (reg16)SETB_UB0, (reg16)SETB_CB) ||
@@ -281,21 +308,21 @@ namespace WPU2D
 				for(int i = 0; PasstroughBits[i]; ++i)
 					if(operand == PasstroughBits[i])
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			if(index == RETI)
 				return 0;
 
 			// if nothing fits..
-			throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+			throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 		}
 
 		bool Mnemonic::PasstroughIndexIndirectMatch(std::string base, std::string operand)
 		{
 			base = base.substr(1, base.npos);	// remove the exec-time
 
-			for(int i = MOVF32_ptrST; i < MOVT8_ptrHE_PO; ++i)
+			for(int i = MOVF32_ptrST; i <= MOVT8_ptrHE_PO; ++i)
 				if( base == GetPasstroughBaseName(i) &&
 					operand == GetPasstroughOperandName(i) )
 				{
@@ -312,6 +339,12 @@ namespace WPU2D
 		void Mnemonic::ComposeMnemonic()
 		{
 			mnemonic = "";	// make an empty string
+
+			if(instr.halt)
+			{
+				mnemonic = "HALT";
+				return;
+			}
 
 			switch(instr.baseType)
 			{
@@ -343,7 +376,7 @@ namespace WPU2D
 				{
 				case insIndexReturn:
 					if(instr.indexSubtype.returnType == insIndexRetRegister)
-						mnemonic += GetReturnRegBaseName(instr.index);
+						mnemonic += GetReturnRegBaseName(instr.index, instr.retTAK);
 					else
 						mnemonic += "RET";
 					mnemonic += " ";
@@ -431,7 +464,7 @@ namespace WPU2D
 				if(operand == "")
 					return 0;
 				else
-					throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+					throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 
 			case QEQ_PE:
 			case QGT_PE:
@@ -442,7 +475,7 @@ namespace WPU2D
 				if(operand == "PE")
 					return 0;
 				else
-					throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+					throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			// Register operands
@@ -452,7 +485,7 @@ namespace WPU2D
 				for(int i = 0; QueryRegisterOperands[i]; ++i)
 					if(QueryRegisterOperands[i] == operand)
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			if(	Between(index, (reg16)QB_UB0, (reg16)QB_reserved1) ||
@@ -461,11 +494,11 @@ namespace WPU2D
 				for(int i = 0; QueryBitOperands[i]; ++i)
 					if(QueryBitOperands[i] == operand)
 						return i;
-				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+				throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 			}
 
 			// if nothing matches...
-			throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND);
+			throw ASM2D_Exception(ERR_ASM2D_SYNTAXERR_WRONG_OPERAND, this->mnemonic);
 		}
 
 		// ---------------------------------------------
@@ -561,7 +594,7 @@ namespace WPU2D
 		
 		char *Mnemonic::GetOperationBaseName(reg16 index)
 		{
-			if(Between(index, (reg16)ADD, (reg16)SMAX))
+			if(Between(index, (reg16)ADD, (reg16)SMUL))
 				return OperationALUNames[index];
 
 			if(Between(index, (reg16)FADD, (reg16)FFRAC))
@@ -697,16 +730,36 @@ namespace WPU2D
 			return "??";
 		}
 
-		char *Mnemonic::GetReturnRegBaseName(reg16 index)
+		char *Mnemonic::GetReturnRegBaseName(reg16 index, bool tak)
 		{
-			if(index < RET_ptrHE_PO)
-				return "RET";
-			if(index < RET16_ptrHE_PO)
-				return "RET16";
-			if(index < RET8_ptrHE_PO)
-				return "RET8";
+			if(!tak)
+			{
+				if(index < RET_ptrHE_PO)
+					return "RET";
+				if(index < RET16_ptrHE_PO)
+					return "RET16";
+				if(index < RET8_ptrHE_PO)
+					return "RET8";
 
-			return "RET?";
+				if(Between(index, (reg16)RET_ptrST_m128, (reg16)RET_ptrST_p128))
+					return "RET";
+
+				return "RET?";
+			}
+			else
+			{
+				if(index < RET_ptrHE_PO)
+					return "TAK";
+				if(index < RET16_ptrHE_PO)
+					return "TAK16";
+				if(index < RET8_ptrHE_PO)
+					return "TAK8";
+
+				if(Between(index, (reg16)RET_ptrST_m128, (reg16)RET_ptrST_p128))
+					return "TAK";
+
+				return "TAK?";
+			}
 		}
 
 		std::string Mnemonic::ComposeReturnRegister(reg16 index)
@@ -720,21 +773,33 @@ namespace WPU2D
 			if(Between(index, (reg16)RET_ptrST, (reg16)RET8_ptrHE_PO))
 			{
 				char *base;
-				if( (index-RET_ptrST)%(RET_ptrST_PO-RET_ptrST) )
+				if( (index-RET_ptrST)/(RET_ptrHE_PO-RET_ptrST)&1 )
 					base = "HE";
 				else
 					base = "ST";
 
 				// limit it, because it's repetitive
-				index %= (RET_ptrST_PO-RET_ptrST);
+				index -= RET_ptrST;
+				index %= (RET_ptrST_PO-RET_ptrST)+1;
 
 				std::string reg;
-				reg  = ComposeReturnRegister(index-RET_ptrST-1);
+				reg  = ComposeReturnRegister(index-1);
 
 				if(reg.empty())
-					return base;
+					return (std::string("*") + base);
 
 				reg = "*(" + std::string(base) + "+" + reg + ")";
+
+				return reg;
+			}
+
+			if(Between(index, (reg16)RET_ptrST_m128, (reg16)RET_ptrST_p128))
+			{
+				int num = (index-RET_ptrST_m128)-128;
+				std::string strnum = ToString(num);
+				if(num >= 0)
+					strnum = "+" + strnum;
+				return "*(ST" + strnum + ")";
 			}
 
 			return "??";
@@ -765,7 +830,9 @@ namespace WPU2D
 			"UMIN",
 			"UMAX",
 			"SMIN",
-			"SMAX"
+			"SMAX",
+			"SDIV",
+			"SMUL"
 		};
 
 		char *OperationFPUNames[] =

@@ -10,6 +10,7 @@
 #include "IOinterface.h"
 #include "Global.h"
 #include "Simple2DWPUparallelismManager.h"
+#include "CoreInfoHolders.h"
 
 namespace WPU2D
 {
@@ -35,8 +36,12 @@ namespace WPU2D
 			Simple2DWPUcore **cores;
 			uint ncores;
 
-			// statistics and such
-			ull cycles_count;
+			// Stats
+			CoreStats stats;
+
+			// Debugging
+			bool breakpoint_map[32][32];
+			bool check_breakpoint;
 
 		public:
 			Simple2DWPU(Memory *RAM, uint ncores);
@@ -62,11 +67,18 @@ namespace WPU2D
 
 			// info about the core
 			uint GetCoreCount() { return ncores; }
-			ull GetCycles() { return cycles_count; }
+			ull GetCycles() { return stats.cycles; }
+			CoreStats *GetStats() { return &stats; }
 
 			IOinterface *GetIOinterface() { return io; }
 
+			reg32 GetMemVal(reg32 offset) { return cores[0]->ptrST32(offset); }
+
 			void CheckParallelInvoke() { for(int i = 0; i < ncores; ++i) cores[i]->CheckParallelInvoke(); }
+
+			// debugging
+			void SetBreakpoint(reg5 x, reg5 y);
+			void ClearBreakpoints();
 		};
 	}
 }

@@ -28,4 +28,5 @@ public:
 
 signals:
     void UpdateUI();
+	void Halt();
 };

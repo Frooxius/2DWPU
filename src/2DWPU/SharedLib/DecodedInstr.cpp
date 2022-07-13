@@ -9,6 +9,12 @@ namespace WPU2D
 		*/
 		void DecodedInstr::DecodeInstruction(reg16 instr)
 		{
+			if(instr == 0xFFFFU)
+			{
+				halt = true;
+				return;
+			}
+
 			baseType = (InstrBase)((instr & 0xC000U) >> 14); // decode the base type
 			
 			// Further decoding is specific to each type
@@ -44,6 +50,11 @@ namespace WPU2D
 				case insIndexReturn:
 					indexSubtype.returnType =
 						(InstrIndexReturn)((instr & 0x0C00U) >> 10);
+
+					// determine if it's TAKe
+					retTAK = index&0x0200U;
+					index &= ~0x0200U;
+
 					break;
 				case insIndexJump:
 					indexSubtype.jumpUpper2b = (instr & 0x0C00U) >> 10;
@@ -83,6 +94,9 @@ namespace WPU2D
 
 		reg16 DecodedInstr::EncodeInstruction()
 		{
+			if(halt)
+				return (reg16)0xFFFFU;
+
 			reg16 opcode = 0;
 			
 			// write the baseType
@@ -117,8 +131,10 @@ namespace WPU2D
 
 				switch(indexType)
 				{
-				case insIndexJump:
 				case insIndexReturn:
+					opcode |= ((reg16)retTAK) << 9;
+						// fall trough intentionally					
+				case insIndexJump:
 					opcode |= indexSubtype.raw << 10;
 					break;
 

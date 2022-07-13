@@ -1,0 +1,5 @@
+block Testing
+[ADD_RD] [RET 8]
+[SDIV_RD] [RET -8]
+[RET 2 ]
+<ENDBLOCK>

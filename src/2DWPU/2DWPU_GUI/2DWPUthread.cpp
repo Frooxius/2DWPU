@@ -49,7 +49,12 @@ void WPU2Dthread::run()
                 StopMutex.unlock();
                 return;
             }
-            (*wpu)->Cycle(updates);
+            if(!(*wpu)->Cycle(updates))
+			{
+				// if it requests halt, then stop it
+				emit Halt();
+				break;
+			}
             cyclesdelta+=updates;
         } while( (cyclesdelta < updatecycles || *maxhz) && time.elapsed() < updatems);
 

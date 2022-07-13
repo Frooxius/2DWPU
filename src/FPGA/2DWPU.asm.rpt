@@ -1,0 +1,133 @@
+Assembler report for 2DWPU
+Wed May 09 19:57:04 2012
+Quartus II 32-bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Assembler Summary
+  3. Assembler Settings
+  4. Assembler Generated Files
+  5. Assembler Device Options: D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/2DWPU.sof
+  6. Assembler Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; Assembler Summary                                             ;
++-----------------------+---------------------------------------+
+; Assembler Status      ; Successful - Wed May 09 19:57:03 2012 ;
+; Revision Name         ; 2DWPU                                 ;
+; Top-level Entity Name ; WPU_2DWPU_Test                        ;
+; Family                ; Cyclone IV E                          ;
+; Device                ; EP4CE115F29C7                         ;
++-----------------------+---------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Assembler Settings                                                                                     ;
++-----------------------------------------------------------------------------+----------+---------------+
+; Option                                                                      ; Setting  ; Default Value ;
++-----------------------------------------------------------------------------+----------+---------------+
+; Use smart compilation                                                       ; On       ; Off           ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation  ; On       ; On            ;
+; Enable compact report table                                                 ; Off      ; Off           ;
+; Generate compressed bitstreams                                              ; On       ; On            ;
+; Compression mode                                                            ; Off      ; Off           ;
+; Clock source for configuration device                                       ; Internal ; Internal      ;
+; Clock frequency of the configuration device                                 ; 10 MHZ   ; 10 MHz        ;
+; Divide clock frequency by                                                   ; 1        ; 1             ;
+; Auto user code                                                              ; Off      ; Off           ;
+; Use configuration device                                                    ; Off      ; Off           ;
+; Configuration device                                                        ; Auto     ; Auto          ;
+; Configuration device auto user code                                         ; Off      ; Off           ;
+; Generate Tabular Text File (.ttf) For Target Device                         ; Off      ; Off           ;
+; Generate Raw Binary File (.rbf) For Target Device                           ; Off      ; Off           ;
+; Generate Hexadecimal (Intel-Format) Output File (.hexout) for Target Device ; Off      ; Off           ;
+; Hexadecimal Output File start address                                       ; 0        ; 0             ;
+; Hexadecimal Output File count direction                                     ; Up       ; Up            ;
+; Release clears before tri-states                                            ; Off      ; Off           ;
+; Auto-restart configuration after error                                      ; On       ; On            ;
+; Enable OCT_DONE                                                             ; Off      ; Off           ;
+; Generate Serial Vector Format File (.svf) for Target Device                 ; Off      ; Off           ;
+; Generate a JEDEC STAPL Format File (.jam) for Target Device                 ; Off      ; Off           ;
+; Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device ; Off      ; Off           ;
+; Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device ; On       ; On            ;
++-----------------------------------------------------------------------------+----------+---------------+
+
+
++---------------------------------------------------------------------------------+
+; Assembler Generated Files                                                       ;
++---------------------------------------------------------------------------------+
+; File Name                                                                       ;
++---------------------------------------------------------------------------------+
+; D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/2DWPU.sof ;
++---------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/2DWPU.sof ;
++----------------+------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                  ;
++----------------+------------------------------------------------------------------------------------------+
+; Device         ; EP4CE115F29C7                                                                            ;
+; JTAG usercode  ; 0xFFFFFFFF                                                                               ;
+; Checksum       ; 0x051EAB1C                                                                               ;
++----------------+------------------------------------------------------------------------------------------+
+
+
++--------------------+
+; Assembler Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II 32-bit Assembler
+    Info: Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Web Edition
+    Info: Processing started: Wed May 09 19:56:51 2012
+Info: Command: quartus_asm --read_settings_files=on --write_settings_files=off 2DWPU -c 2DWPU
+Warning (20013): Ignored assignments for entity "DE2_115_LTM_TEST" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name LL_ROOT_REGION ON -entity DE2_115_LTM_TEST -section_id "Root Region" was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name LL_MEMBER_STATE LOCKED -entity DE2_115_LTM_TEST -section_id "Root Region" was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_PRESERVE_HIGH_SPEED_TILES ON -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IGNORE_SOURCE_FILE_CHANGES OFF -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_ALWAYS_USE_QXP_NETLIST OFF -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_COLOR 16764057 -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IMPORT_ASSIGNMENTS ON -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IMPORT_EXISTING_ASSIGNMENTS REPLACE_CONFLICTING -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IMPORT_EXISTING_LOGICLOCK_REGIONS REPLACE_CONFLICTING -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IMPORT_PIN_ASSIGNMENTS ON -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_IMPORT_PROMOTE_ASSIGNMENTS ON -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name PARTITION_TYPE STANDARD_PARTITION -entity DE2_115_LTM_TEST -section_id Top was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name ALLOW_MULTIPLE_PERSONAS OFF -entity DE2_115_LTM_TEST -section_id Top was ignored
+Info (115031): Writing out detailed assembly data for power analysis
+Info (115030): Assembler is generating device programming files
+Info: Quartus II 32-bit Assembler was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 705 megabytes
+    Info: Processing ended: Wed May 09 19:57:04 2012
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:13
+
+

@@ -39,7 +39,7 @@ namespace WPU2D
 			char *GetPasstroughBaseName(reg16 index);
 			char *GetPasstroughOperandName(reg16 index);
 			std::string ComposeReturnRegister(reg16 index);
-			char *GetReturnRegBaseName(reg16 index);
+			char *GetReturnRegBaseName(reg16 index, bool tak);
 
 			void DecomposeMnemonic(
 				std::string mnemonic,

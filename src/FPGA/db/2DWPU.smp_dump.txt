@@ -1,0 +1,78 @@
+
+State Machine - |WPU_2DWPU_Test|LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|msetup_st
+Name msetup_st.0011 msetup_st.0010 msetup_st.0001 msetup_st.0000 msetup_st.0100 
+msetup_st.0000 0 0 0 0 0 
+msetup_st.0001 0 0 1 1 0 
+msetup_st.0010 0 1 0 1 0 
+msetup_st.0011 1 0 0 1 0 
+msetup_st.0100 0 0 0 1 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core9|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core8|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core7|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core6|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core5|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core4|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core3|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core2|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core1|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 
+
+State Machine - |WPU_2DWPU_Test|WPU_2DWPU:Processor|Core2DWPU:Core0|InstrDecoder:controller|actionTime
+Name actionTime.timeImmediate actionTime.timeBoth actionTime.timeReturn actionTime.timeEntry 
+actionTime.timeEntry 0 0 0 0 
+actionTime.timeReturn 0 0 1 1 
+actionTime.timeBoth 0 1 0 1 
+actionTime.timeImmediate 1 0 0 1 

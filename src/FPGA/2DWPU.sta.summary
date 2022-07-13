@@ -1,0 +1,221 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -66.240
+TNS   : -20787.118
+
+Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
+Slack : -16.658
+TNS   : -1130.836
+
+Type  : Slow 1200mV 85C Model Setup 'LTM_TOP:LCDcontroller|div'
+Slack : -5.946
+TNS   : -82.127
+
+Type  : Slow 1200mV 85C Model Setup 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -2.367
+TNS   : -78.134
+
+Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
+Slack : -0.065
+TNS   : -0.065
+
+Type  : Slow 1200mV 85C Model Hold 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.289
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.407
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'LTM_TOP:LCDcontroller|div'
+Slack : 0.557
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'LTM_TOP:LCDcontroller|div'
+Slack : -0.634
+TNS   : -28.615
+
+Type  : Slow 1200mV 85C Model Recovery 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -0.252
+TNS   : -2.173
+
+Type  : Slow 1200mV 85C Model Recovery 'CLOCK_50'
+Slack : 14.749
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'LTM_TOP:LCDcontroller|div'
+Slack : 0.836
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'CLOCK_50'
+Slack : 1.763
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|div'
+Slack : -1.285
+TNS   : -68.105
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -1.285
+TNS   : -48.830
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 9.565
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 32.981
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -53.504
+TNS   : -16661.722
+
+Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -15.136
+TNS   : -1019.672
+
+Type  : Slow 1200mV 0C Model Setup 'LTM_TOP:LCDcontroller|div'
+Slack : -5.394
+TNS   : -70.472
+
+Type  : Slow 1200mV 0C Model Setup 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -2.103
+TNS   : -68.726
+
+Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
+Slack : -0.041
+TNS   : -0.041
+
+Type  : Slow 1200mV 0C Model Hold 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.283
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.357
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'LTM_TOP:LCDcontroller|div'
+Slack : 0.508
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'LTM_TOP:LCDcontroller|div'
+Slack : -0.478
+TNS   : -21.296
+
+Type  : Slow 1200mV 0C Model Recovery 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -0.249
+TNS   : -2.216
+
+Type  : Slow 1200mV 0C Model Recovery 'CLOCK_50'
+Slack : 15.081
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.146
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'LTM_TOP:LCDcontroller|div'
+Slack : 0.729
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'CLOCK_50'
+Slack : 1.585
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|div'
+Slack : -1.285
+TNS   : -68.105
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -1.285
+TNS   : -48.830
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 9.570
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 32.923
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -7.816
+TNS   : -516.151
+
+Type  : Fast 1200mV 0C Model Setup 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -7.244
+TNS   : -229.422
+
+Type  : Fast 1200mV 0C Model Setup 'LTM_TOP:LCDcontroller|div'
+Slack : -2.320
+TNS   : -19.559
+
+Type  : Fast 1200mV 0C Model Setup 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -0.665
+TNS   : -18.639
+
+Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
+Slack : -0.135
+TNS   : -0.189
+
+Type  : Fast 1200mV 0C Model Hold 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.094
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.103
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'LTM_TOP:LCDcontroller|div'
+Slack : 0.249
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'LTM_TOP:LCDcontroller|div'
+Slack : 0.117
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : 0.278
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'CLOCK_50'
+Slack : 17.185
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -0.048
+TNS   : -0.563
+
+Type  : Fast 1200mV 0C Model Removal 'LTM_TOP:LCDcontroller|div'
+Slack : 0.332
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'CLOCK_50'
+Slack : 0.814
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|div'
+Slack : -1.000
+TNS   : -53.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'LTM_TOP:LCDcontroller|lcd_spi_cotroller:u2|three_wire_controller:u0|mSPI_CLK'
+Slack : -1.000
+TNS   : -38.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 9.202
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'PLLclock|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 33.034
+TNS   : 0.000
+
+------------------------------------------------------------

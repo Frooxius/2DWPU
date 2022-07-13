@@ -1,0 +1,7 @@
+static block ConditionTest
+[QRY_RD] [<MOVT_R LI] [RET 0]
+[QZ_D LI]
+[QRY_RD] [<MOVT_R ST] [RET 0]
+[QRY_RD] [RET 1]
+[QNZ_R ARG] [SUB_R2R] [RET 4] [<MOVT_R ST] [ADD_R2R] [RET ST] [RET 1]
+<ENDBLOCK>

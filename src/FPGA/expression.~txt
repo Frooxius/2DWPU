@@ -1,0 +1,4 @@
+static block Expression
+[<MOVT_R LI] [ADD_RD] [ADD_RR] [RET 2]
+[RET 7]      [SUB_LR] [RET 4]							
+<ENDBLOCK>

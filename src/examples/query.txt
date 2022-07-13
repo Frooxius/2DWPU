@@ -1,0 +1,4 @@
+block Test
+[QNZ_DR LI]  [<MOVT_R LI] [RET 1]
+[<MOVT_R LI] [RET 1]
+<ENDBLOCK>

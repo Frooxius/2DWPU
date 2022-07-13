@@ -1,0 +1,6 @@
+static block Expression
+[<MOVT_R LI] [MUL_RD] [ADD_R2R] [ADD_DR] [RET LI]
+[DIV_D2D]    [ADD_RL] [SUB_2RR] [RET 2]  [QRY_U]
+[MUL_RR]     [RET 32]
+[SR_UR]      [RET 4]
+<ENDBLOCK>

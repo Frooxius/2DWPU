@@ -10,6 +10,28 @@ namespace WPU2D
 	namespace Core
 	{
 		/*	**************************************
+					**** Statistics ****
+			*************************************/	
+		struct CoreStats
+		{
+			ull cycles,
+				instructions,
+				queries,
+				returns,
+				ioreads,
+				iowrites,
+				memreads,
+				memwrites,
+
+				parallel_forks,
+				parallel_joins,
+				parallel_failed_forks,
+				parallel_failed_joins;
+			void Reset() { *this = CoreStats(); }
+		};
+
+
+		/*	**************************************
 				**** Program Block info ****
 			*************************************/
 		enum ProgramBlockInfoOffeset

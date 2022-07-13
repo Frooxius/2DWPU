@@ -1,0 +1,64 @@
+static block Animation
+LI - hold value
+
+TR - point X
+SQ - point Y
+
+CI - status
+	0 - right
+	1 - up
+	2 - left
+	3 - down
+	
+RE - distance calc
+
+ST - touch X
+EL - touch Y
+
+-- initialization
+[QRY_RD] [QRY_R3R] [<MOVT_R LI] [RET 1] [QRY_R3R] [<MOVT_R TR] [RET 51200] [QRY_R3R] [<MOVT_R SQ] [RET 30720] [<MOVT_R CI] [RET 0]
+
+[QNZ_R LI]  [QRY_D]
+
+-- Right                                                                      Up																																							Left																																				Down
+[QRY_3D]		[QRY_DR    ] [QRY_R2L ] [QRY_2R] [RET 0   ] [QRY_3R] [RET 0 ]     [RET 0    ] [QRY_D4R   ] [RET 0   ] [RET 0 ] [RET 0   ] [QRY_3R  ] [RET 0 ] 	[RET 0    ] [QRY_D4R   ] [RET 0   ] [RET 0 ] [RET 0   ] [QRY_3R  ] [RET 0 ]   [RET 0 ]    [QRY_D  ]
+[QZ_D ARG ] [QRY_RL    ] [SUB_R2R ] [RET CI] [RET 0   ] [RET 0 ] [RET 0 ]     [QZ_D ARG ] [QRY_RL    ] [SUB_R2R ] [RET CI] [RET 1   ] [RET 0   ] [RET 0 ]   [QZ_D ARG ] [QRY_RL    ] [SUB_R2R ] [RET CI] [RET 2   ] [RET 0   ] [RET 0 ]   [QZ_D ARG ] [QRY_RL    ] [SUB_R2R ] [RET CI] [RET 3   ] [RET 0   ] [RET 0 ]
+
+[QRY_R2D  ] [SUB_RD    ] [SMAX_R2R] [QRY_D ] [ADD_R2R ] [RET ST] [RET PE]			[QRY_R2D  ] [SUB_RD    ] [SMIN_R2R] [QRY_D ] [SUB_R2R ] [RET EL] [RET PE]			[QRY_R2D  ] [SUB_RD    ] [SMIN_R2R] [QRY_D ] [SUB_R2R ] [RET ST] [RET PE]			[QRY_R2D  ] [SUB_RD    ] [SMAX_R2R] [QRY_D ] [ADD_R2R ] [RET EL] [RET PE]
+[QRY_2D   ] [QRY_2R    ] [RET 0   ] [SR_R2R] [RET TR  ] [RET 8 ] [RET 0 ]			[RET 0    ] [QRY_2R    ] [RET 0   ] [SR_R2R] [RET SQ  ] [RET 8 ] [RET 0 ]			[RET 0    ] [QRY_2R    ] [RET 0   ] [SR_R2R] [RET TR  ] [RET 8 ] [RET 0 ]			[RET 0    ] [QRY_2R    ] [RET 0   ] [SR_R2R] [RET SQ  ] [RET 8 ] [RET 0 ]
+[QZ_R ARG ] [<MOVT_R CI] [RET 1   ] [RET 0 ] [RET 0   ] [RET 0 ] [RET 0 ]			[QZ_R ARG ] [<MOVT_R CI] [RET 2   ] [RET 0 ] [RET 0   ] [RET 0 ] [RET 0 ]			[QZ_R ARG ] [<MOVT_R CI] [RET 3   ] [RET 0 ] [RET 0   ] [RET 0 ] [RET 0 ]			[QZ_R ARG ] [QRY_R3R   ] [<MOVT_R CI] [RET 0   ] [RET 1 ] [RET 0   ] [RET 0 ] [RET 0 ]
+
+-- right
+[QRY_D3D]
+[QRY_RD] [SUB_R2R] [RET CI] [RET 0]
+[QZ_R ARG] [<MOVT_R TR] [ADD_R2R] [RET TR] [RET 32]
+
+-- up
+[QRY_D3D]
+[QRY_RD] [SUB_R2R] [RET CI] [RET 1]
+[QZ_R ARG] [<MOVT_R SQ] [SUB_R2R] [RET SQ] [RET 32]
+
+-- left
+[QRY_D3D]
+[QRY_RD] [SUB_R2R] [RET CI] [RET 2]
+[QZ_R ARG] [<MOVT_R TR] [SUB_R2R] [RET TR] [RET 32]
+
+-- down
+[QRY_D3D]
+[QRY_RD] [SUB_R2R] [RET CI] [RET 3]
+[QZ_R ARG] [<MOVT_R SQ] [ADD_R2R] [RET SQ] [RET 32]
+
+[QRY_RD] [<MOVT_R PE] [AND_R2R] [RET 30] [SR_2RR] [RET 9] [<MOVT_R PO] [ADD_R2R] [RET 1] [RET PO]
+
+[QRY_RD] [<MOVT_R HE] [RET 0]
+[QRY_RD] [<MOVT_R *HE] [SR_R2R] [RET TR] [RET 8]
+[QRY_RD] [<MOVT_R HE] [RET 1]
+[QRY_RD] [<MOVT_R *HE] [SR_R2R] [RET SQ] [RET 8]
+[QRY_RD] [<MOVT_R HE] [RET 2]
+[QRY_RD] [<MOVT_R *HE] [SR_2RR] [RET 10] [<MOVT_R PO] [RET PO]
+[QRY_RD] [<MOVT_R HE] [RET 3]
+[QRY_RD] [<MOVT_R *HE] [RET 0]
+
+[QRY_R3R] [<MOVT_R HE] [RET 0] [QRY_R3R] [<MOVT_R *HE] [RET ST]	[QRY_R3R] [<MOVT_R HE] [RET 1] [QRY_R3R] [<MOVT_R *HE] [RET EL] [QRY_R3R] [<MOVT_R HE] [RET 2] [QRY_R3R] [<MOVT_R *HE] [RET PO] [QRY_R3R] [<MOVT_R HE] [RET 3] [<MOVT_R *HE] [RET 0]
+
+<ENDBLOCK>

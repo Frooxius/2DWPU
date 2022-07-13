@@ -213,6 +213,8 @@ namespace WPU2D
 			UMAX,
 			SMIN,
 			SMAX,
+			SDIV,
+			SMUL,
 			
 			FADD = 32,
 			FSUB,
@@ -475,7 +477,12 @@ namespace WPU2D
 			RET8_ptrHE_HE,
 			RET8_ptrHE_ST,
 			RET8_ptrHE_EL,
-			RET8_ptrHE_PO
+			RET8_ptrHE_PO,
+
+			RET_ptrST_m128 = 128,
+			RET_ptrST_p128 = 384,
+
+			RET_TERMINATOR
 		};
 
 

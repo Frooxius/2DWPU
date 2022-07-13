@@ -6,10 +6,11 @@ namespace WPU2D
 	namespace Core
 	{
 		Simple2DWPU_PM::Simple2DWPU_PM(
-			Simple2DWPUcore **cores, uint ncores)
+			Simple2DWPUcore **cores, uint ncores, CoreStats *stats)
 		{
 			this->cores = cores;
 			this->ncores = ncores;
+			this->stats = stats;
 			// now allocate enough ParCoreInfo's
 			coreinfo = new ParCoreInfo[ncores];
 
@@ -66,6 +67,8 @@ namespace WPU2D
 			if(coreinfo[coreid].result_top == MAX_PARALLEL_RESULTS)
 				return;
 
+			stats->parallel_failed_forks++;
+
 			// find a free core
 			for(int i = 0; i < ncores; ++i)
 				if(cores[i]->C_FREE() && !coreinfo[i].processing)
@@ -74,6 +77,10 @@ namespace WPU2D
 					cores[i]->C_ARG( cores[coreid]->C_ARG() );
 					cores[i]->C_PC( cores[coreid]->C_PC() );
 					cores[i]->C_RQST(true);
+
+					// copy the PE and PO registers
+					cores[i]->GetPrivateReg()->PE = cores[coreid]->C_PE();
+					cores[i]->GetPrivateReg()->PO = cores[coreid]->C_PO();
 
 					// store information about the new core
 					coreinfo[i].forID = coreid;
@@ -86,6 +93,9 @@ namespace WPU2D
 
 					// notify the calling core that the task has been assigned
 					cores[coreid]->C_ACPT(true);
+
+					stats->parallel_forks++;
+					stats->parallel_failed_forks--;
 
 					break;
 				}
@@ -101,7 +111,11 @@ namespace WPU2D
 					coreinfo[coreid].result[coreinfo[coreid].result_top-1].val);
 				coreinfo[coreid].result_top--;
 				cores[coreid]->C_REDY(true);
+
+				stats->parallel_joins++;
 			}
+			else
+				stats->parallel_failed_joins++;
 		}
 
 	}

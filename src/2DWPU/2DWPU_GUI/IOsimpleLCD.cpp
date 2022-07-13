@@ -4,9 +4,9 @@ namespace WPU2D
 {
 	namespace Core
 	{
-		IOsimpleLCD::IOsimpleLCD(QGraphicsScene *scene)
+		IOsimpleLCD::IOsimpleLCD(SimpleLCD *lcd)
 		{
-			this->scene = scene;
+			this->lcd = lcd;
 			ClearBuffer();
 			Display();
 			baseaddr = 0;
@@ -59,9 +59,7 @@ namespace WPU2D
 		void IOsimpleLCD::Display()
 		{
 			QImage img(buffer, 400, 240, QImage::Format_RGB888);
-			scene->clear();
-			scene->addPixmap(QPixmap::fromImage(img));
-			scene->update();
+			lcd->Draw(&img);
 		}
 
 		void IOsimpleLCD::WritePixel()
@@ -69,9 +67,11 @@ namespace WPU2D
 			x %= 400;
 			y %= 240;
 
-			buffer[ (x + (y*400))*3 + 0] = b;
-			buffer[ (x + (y*400))*3 + 1] = g;
-			buffer[ (x + (y*400))*3 + 2] = r;
+			buffer[ (x + (y*400))*3 + 0] |= b;
+			buffer[ (x + (y*400))*3 + 1] |= g;
+			buffer[ (x + (y*400))*3 + 2] |= r;
+
+			r = g = b = 0;
 		}
 	}
 }

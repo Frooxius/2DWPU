@@ -1,0 +1,13 @@
+static block D:/Frooxius/Projects/Software/Applications/WPU Series/2D WPU/src/FPGA/randomIOtest.txt
+[QRY_RD]      [<MOVT_R LI]  [RET 0]   [RET 1]
+[QZ_R LI]     [QRY_RD]      [QRY_DR]  [QRY_RU] [<MOVT_R *HE] [<MOVT_R HE] [RET 6]
+[QNZ_D ARG]   [<MOVT_R SQ]  [RET 0]
+[QRY_D]       [QRY_LR]      [SUB_2RR] [RET 4000] [<MOVT_R SQ] [ADD_R2R] [RET SQ] [RET 1]
+[QRY_RD]      [<MOVT_R HE]  [RET 0]
+[QRY_RD]      [<MOVT_R *HE] [MOD_2RR] [RET 400] [RET #10] [MUL_RR] [MUL_RR] [RET #10]
+[QRY_RD]      [<MOVT_R HE]  [RET 1]
+[QRY_RD]      [<MOVT_R *HE] [MOD_2RR] [RET 240] [RET #10] [MUL_RR] [MUL_RR] [RET #10]
+[QRY_RD]      [<MOVT_R HE]  [RET 2]
+[QRY_RD]      [<MOVT_R *HE] [ADD_R2R] [RET 1] [RET #10]
+[<MOVT_R *HE] [<MOVT_R HE]  [RET 3]
+<ENDBLOCK>

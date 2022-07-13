@@ -6,6 +6,7 @@
 #include "Global.h"
 #include "Registers.h"
 #include "IOinterface.h"
+#include "CoreInfoHolders.h"
 
 namespace WPU2D
 {
@@ -34,10 +35,17 @@ namespace WPU2D
 			// info about the core
 			virtual uint GetCoreCount() = 0;
 			virtual ull GetCycles() = 0;
+			virtual CoreStats *GetStats() = 0;
 
 			virtual IOinterface *GetIOinterface() = 0;
 
 			virtual void CheckParallelInvoke() = 0;
+
+			virtual reg32 GetMemVal(reg32 offset) = 0;
+
+			// Debugging
+			virtual void SetBreakpoint(reg5 x, reg5 y) = 0;
+			virtual void ClearBreakpoints() = 0;
 		};
 	}
 }
