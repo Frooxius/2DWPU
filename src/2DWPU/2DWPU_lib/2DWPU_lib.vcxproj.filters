@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AnalysisCore">
+      <UniqueIdentifier>{cb915902-cac2-480f-9af5-6c0b1fbe192c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SimpleCore">
+      <UniqueIdentifier>{489d97de-54ef-4bd4-90a0-f3ad59f58e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SimpleCore">
+      <UniqueIdentifier>{af2636dc-dedb-4fb6-91e1-03c354866120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IOdevices">
+      <UniqueIdentifier>{f23550eb-db53-4885-9919-d06c0c3f36cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Analys2DWPU.h">
+      <Filter>Header Files\AnalysisCore</Filter>
+    </ClInclude>
+    <ClInclude Include="WPU2Dcore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Analys2DWPUcore.h">
+      <Filter>Header Files\AnalysisCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple2DWPU.h">
+      <Filter>Header Files\SimpleCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple2DWPUcore.h">
+      <Filter>Header Files\SimpleCore</Filter>
+    </ClInclude>
+    <ClInclude Include="2DWPUconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple2DWPUparallelismManager.h">
+      <Filter>Header Files\SimpleCore</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreInfoHolders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOinterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="2DWPU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Registers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOdevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOrandgen.h">
+      <Filter>Header Files\IOdevices</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="2DWPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Analys2DWPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Analys2DWPUcore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Simple2DWPUcore.cpp">
+      <Filter>Source Files\SimpleCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Simple2DWPU.cpp">
+      <Filter>Source Files\SimpleCore</Filter>
+    </ClCompile>
+    <ClCompile Include="IOinterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

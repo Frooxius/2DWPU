@@ -1,0 +1,6 @@
+block Lol
+[QRY_RD] [QRY_DD] [QRY_LD]
+[QRY_R2R][QRY_LD] [QRY_D]
+[RET 0]  [QRY_LR] [QRY_D]
+[RET 0] [RET 0] [RET 0]
+<ENDBLOCK>

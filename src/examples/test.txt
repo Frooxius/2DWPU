@@ -1,0 +1,10 @@
+// Hello World for 2DWPU in 2DASM written by Tomas "Frooxius" Mariancik 6/7/2011
+static block HelloWorld
+[QRY_RD]     [<MOVT_R ST]  [RET 459]
+[QRY_RD]     [<MOVT_R HE]  [RET 42093]
+[QNZ_RD *ST] [QRY_DR]      [|INC ST]
+[FRK]       [>MOVF_R *ST] [|MOVT *HE]
+<ENDBLOCK>
+
+text:
+"Hello World!\0"

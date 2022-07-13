@@ -1,0 +1,165 @@
+This processor uses special form of instruction, which basically
+queries one or more of surrounding instructions for a result and
+then returns it to a instruction that queried this instruction.
+
+Instructions are logically (technically, they're linear sequence)
+aligned in a 2D grid, with several rows and columns, forming a 
+program block. There can be several blocks.
+
+Basically at the start of the processor instruction at position
+[0,0] is queried for a result, which is a starting point of
+the program. From there, programmer can construct whole program.
+
+Designing a progrma for this WPU does however need programmer
+to align instructions in the grid efficiently, if possible,
+use some parts of the program several times.
+
+Instructions are basically divided into two groups:
+	-querying (these need to query another instruction in order
+	to return a value)
+	-immediate (these return result immediatelly)
+
+Basically, querying instructions form a query path: each instruction
+queries another and and another one, until they query immediate
+instruction, at which point, this immediate instruction returns a value
+to instruction which queried it, which can in turn calculate and return
+another value and so on. This is achieved by query stack, which basicaly
+stores return directions: in which direction should instruction return.
+
+Some instructions query another one, but do nothing with result,
+just pass it. These allow for example to form a bridge - path
+between two distant instructions, allowing one instruction to
+query another, more distant one. It's also possible for instruction to do some
+action, independent on the value and just pass the argument, this however raises
+question, when the action should be completed: when the instruction is called or when it returns?
+
+There's also need to somehow determine, what should instruction do at given moment, probably using some form of status register, which is pushed on the call stack together with return direction and when processor returns to given instruction, it will restore this status register, allowing instruction to continue in its function, based on the value (for example, query another side or return).
+
+Perhaps, when instruction is called, there's need to store return direction, but because also calls/jumps are possible, there needs to be a posibility for instruction to return to any arbitrary address. Solution should be simple: just store complete address on the stack and leave graphical reprezentation of the stack on the emulator (it will show an arrow showing direction of return right next to return address, or some other symbol, when it's not a single direction, but a jump). This can be implemented without having to specify this in the emulation core (for processor is irrelevant, whether it's single step return or a jump): the core will allow to register events at various steps of emulation. Emulator GUI will simply register event and then use the data to determine which symbol to show.
+
+Because of its architecture, this processor needs quite a big stack, which will be basically equal to maximum length of a query (1024?)
+
+Also, various instructions will have several forms, since there are several possible combinations of directions. The symbols should be intuitive, like:
+ADD_UD (up down) ADD_LD (left down).
+
+Passtrough action instructions can use special symbol, to determine when the instruction (action) should be called:
+	>INS xxxx 		- action is called when the instruction is entered (queried)
+	<INS xxxx			- action is called when the instruction is exited (returning)
+	=INS xxxx			- action is called twice, in both directions
+
+Problem: it's possible to call any instruction and do not use paths at all? Maybe if calling such a short path would be penalized a lot (by using more machine cycles than usual)
+
+Question: Will it be possible for instructions to have arguments (and if so, how many?) or should variables be completely solved by registers and indirection and special immediate instructions returning some variable from memory or direct value.
+
+Problem: how to ensure correct program flow? Is it possible to construct any program using just this style of function? Maybe some branch instructions will be needed - these will do nothing with argument and such, just query two or three surrounding instructions in specific order, one after one. By implementing more of these, it should be possible to construct basically any program, because it's possible to sequence instructions in this way, while still using different approach to programming, basically making whole work a query. It's still needed to test this problem thoroughly.
+
+Sample 1 (showing binary numbers on port 1):
+
+[<MOV_D P1] [NOP    ]
+[ADD_RD	  ]	[1      ]
+[P1			  ] [NOP    ]
+
+Explained:
+Processor starts by calling cell [0; 0], where is instruction <MOV_D P1.
+This instruction moves returned value to register P1 on instruction return. So first, it queries instruction below, which is ADD_RD. This instruction first queries right instruction, which is immediate instruction returning value 1. Then it queries instruction P1, which returns current value of P1. ADD_RD adds these two numbers together and then returns back to MOV_D. This instruction returns too, while moving returned value to P1 and this process repeats, by processor querying [0; 0] instruction again.
+
+
+Thinking: Maybe make several registers and allow to specify, to wich register will insturction store the result, so the number of values won't be limited to one (argument register). This should allow use of loops.
+
+Sample 2 (add to variable B 2 and then multiply it by 5 five times)
+This example uses a loop:
+[QRY_RD  ] [<MOV_R A, ARG] [RET 5   ] [NOP   ]
+[QNZ_R A ] [QRY_DR       ] [SUB_R A ] [RET 1 ]
+[RET 5   ] [MUL_LR B     ] [ADD_RD  ] [RET 2 ]
+[NOP     ] [NOP          ] [RET B   ] [NOP   ]
+
+Explained:
+	Processor starts with QRY_RD (query right down), which queries right instruction first. This instruction queries also instruction on the right, which returns 5 and then the value is moved to register A and MOV returns back to QRY_RD. This instruciton now queries instruction below, which is QNZ_R (query not zero right). As long as A (which is 5 now) is not zero, it will continue querying the instruction on the right. Following instruction queries instruction below (MUL_LR). This one queries ADD_RD on the right, which queries RET 2 and RET B to get these values and added them together, storing the result in ARG and returning to MUL_LR B, which then queries RET 5 to get value 5 and multiplies both values, storing the result in B. It then returns to QRY_DR, which queries SUB_R A on the right which queries RET 1 and subtracts returned 1 from A, storing result in the A, thus decrementing the value of A. It then returns to QRY_DR, which returns to QNZ_R A. If A is still above zero, QNZ_R A will query right instruction again and whole process starts again and repeats, until A is zero.
+
+Problem: What about jumps? Are they needed? If so, there's need to somehow deal with the instruction call stack.
+
+Sample 3 (summing numbers in an zero (null) terminated integer array)
+[QRY_RD      ]	[<MOV_R A, ARG]	[RET array_addr]
+[QRY_RD			 ]	[CLR C]					[NOP					 ]
+[>MOV_R B, @A]	[QNZ_R B      ] [<MOV_D B, @A  ]
+[RET B			 ]	[ADD_L C      ]	[QRY_LD			 	 ]
+[]							[RET 1				]	[ADD_L A			 ]
+
+Explanation: Processor starts by querying the first instruction: QRY_RD. This instruciton queries instruction on the right, which queries RET array_addr, which returns the starting address of the array using ARG register. Then, instruction on the left moves this value to register A, which will be used as a register for indirect addressation. QRY_RD then queries QRY_RD below, which will query immediate instruciton CLR C, clears contents (sets to zero) of register C, which will be used for sum and returns. QRY_RD then queries instruciton below, which will immediatelly move value at address pointed by A to register B (thus storing the first value of the array there) and quries instruction on the right.
+
+QNZ_R B continues querying instruction on the right, until B is zero, that is, until the value from array is zero (this value terminates calculation). Instruction on the right does nothing when it's called and queries instruction below: QRY_LD, which queries ADD_L C, which queries RET B on the left, which returns the value of B (that is, currently loaded value from the array) and this returned value is then added to C (which holds sum of all values). Then ADD_L C returns and QRY_LD queries instruction below: ADD_L A which queries instruction on the left, which returns 1 and this value is then added to A, causing it to point to the next value. Then it returns, QRY_LD, returns to <MOV_D B, @A, which moves new value from array to register B and returns to QNZ_R B. If this value is not zero, process will repeat and the new value will be added to register C. Once value of zero is enountered, QNZ_R B returns, to >MOV_R B, @A, which returns to QRY_RD, which returns to QRY_RD above and then the program is completed.
+
+Question: What happens when the first instruction returns? Will processor halt its execution or continue querying it, making the program loop forever? The latter is more plausible option, assuming a special instruction for halting program execution can be provided, like >HLT and <HLT (<HLT can be placed on the start, to halt execution after ), so programmer may halt the processor anytime he needs to.
+
+Question: What about long calls? If they will be possible, it would allow to circumvent 2Dinstruction grid programming techniques, for example by randomly positioning instructions in the grid, without need for a bridge, or by using sequence of call instructions, where the call targets will be just simple instructions, for data manipulation. If calls will be alowed, it's needed to discourage this kind of programming somehow, so only using calls for calling longer subroutines would be benefitial.
+
+One option is to make call require several machine cycles, or make returning long and difficult (for example by completely tracing the way back to instruciton that called, using single steps, but pushing special value to status register, so the instructions, trough which processors returns won't be executed. This may however completely destroy the benefit from using calls, since especially long calls will taka too many machine cycles to call and then return. On the other hand, this may provide a challenge to better organize the program: programmer will need to either use inline routines or place functions strateggicaly, so the calls will be as fast as possible. This will also be big challenge for potential compilers (for example using C language).
+
+Maybe there could be also possibility for a double and triple jump (thus, jumping over several instructions). How will processor however use these larger jumps when creating an instruction call? Will it try to use as largest jump as possible or simply use a single jump for simplicity?
+
+Single jump: 4 jumps (2 bits)
+Double jump: 8 jumps (3 bits)
+Triple jump: 12 jumps (3.5 bits)
+Quadruple jump: 16 jumps (4 bits) << I'll use this
+
+This leaves 4 bits left in a byte, which can be used to push also status register on the stack, allownig status register to hold values from 0 to 15, which should be more than enough for all uses. If there will be maximum depth of instruction query 1024 instructions, then the stack for return directions will be 1KB big.
+
+How to solve greater program complexity? Maybe using special instruction to start a new fresh execution at certain block (or any arbitrary position? probably not, that would require processor to hold the position of the instruction somewhere, in case the first instruction returned), cleaning the stack. This should allow start different part of the program with fresh stack, cleaned from all previous return directions, thus skipping them. 
+
+How will it also manage the call instruction? It needs to stay on the call instruction until it pushes all needed return directions to the stack and only then change the address of execution. How will its internal architecture do this? It will somehow need to track how many return directions it already pushed, perhaps using ARG register (but it needs two registers, not just one, perhaps using also status register, to indicate the direction currently being processed - first, the horizontal direction is processed using arg as a counter, then status register is incremented and arg is reset to zero and vertial direction is processed).
+
+Quesiton: Instruction size? It's needed to hold instruction itself and two arguments, but instructions can't have arbitrary size, because they need to be aranged in a grid, so even if instruction doesn't need an arguments, they will be filled with zeroes.
+16 bits should be more than enough to hold instruction opcode, allowing maximum of 65536 instructions. Arguments should be 24 bit, allowing to address maximum of 16 MB of data. So the whole instruction with arguments would be 16 + 24 + 24 = 54 bits. It would be good to somehow round the value to 64 bits and find a use for additional 10 bits, to make the whole instruction 8 bytes long, instead of 6,75 bytes long.
+
+NEED TO RESOLVE: how to use additional 10 bits in an instruction to make it 64bit? Prehaps add 4 bits to each argument and 2 bits to instruction opcode (even if they won't be used, they can be reserved for future). Or it can be used for third special argument, needed by some instructions.
+
+Question: What registers does processor offer?
+Processor has special, 4 bit instruction status register, which is always pushed on the stack together with return direction.
+There are also additional registers named simply by letters of the alphabet: A to Z, thus there's 26 registers for storing and transfering data between instructions.
+But what if the need for registers could be resolved by simply allowing to use data memory directly? Programmer can then simply create labels for some locations in the memory and use them as registers, assuming that each instruction can work directly with memory.
+The only needed register is then ARG, which carries the result from the instruction.
+
+MEMORY:
+24 bit addressation allows to allocate up to 16 MB of memory. Memory is used both for program and for data (allowing to write self modifying programs).
+
+INSTRUCTION BLOCK SIZE:
+Each block will be 32x32 instructions big, allowing 1024 instructions in a single block. Of course, programmer may choose to use smaller portion of a block and leave some fields with the NOP instruction, which does nothing (stops program execution? Does it return?). However, for larger programs, it's needed to have more than 1024 instructions, so it's possible to have up to 256 blocks, each one being independent of the other. This allows to use up to 262 144 instructions in one program directly, with self-modifying code it's possible to have even more, although this probably won't be usually needed. If each instruction will be 8 bytes big, this means that program code can be up to 2 MB big, leaving 14 MB for use as data. Since memory is common for both program and data, it's possible to have much smaller program and use more memory for data. 
+
+ASSEMBLER:
+When programming, programmers must specify each program block they want to be assembled, in the same order, they want it to be stored in memory. After the program itself, programmer can put any preloaded data into the memory, using various instructions. Either allocate some locations for use as variables or put there data directly, in hexadecimal format, string format or even include (binary) some file.
+
+COMMUNICATION WITH ENVIRONMENT:
+In order to show some function, processor has to provide access to various devices for input and output. For these, there may be special instructions, designed to access various ports.
+
+PASSTROUGH INSTRUCTIONS:
+these have only one argument and the second argument is always the returned value. This way, instruction opcodes actually do not have to contain values
+!! The argument is built into the opcode of the instruction, not stored in the table.
+
+INSTRUCTION SIZE:
+instruction opcode is 16 bits, thus 2 bytes, allowing up to 65536 instructions (including varitans of instructions). Because they are in a grid, instruction opcodes with arguments have to be uniform, but it's not possible to place an argument in the opcode itself (in the table), since it's just 16 bits, but if the opcode was expanded to larger size, then this would cause big waste of space, since many instructions don't need an argument and 16 bits is more than enough.
+
+To solve this, arbitrary values are stored in a table that's stored after the grid of instructions. Compiler/assembler automaticlaly generates this table, each time it encounters arbitrary numertic value, it places this value in the table at certain position, with a certain index number and generates appropriate return instruction, that references given index.
+
+because there can be up to 1024 instructions in a grid, there can be theoretically 1024 values in the table, so 1024 indexes are needed - 1024 variants of return instructions are needed, which still leaves 64 512 codes available for other instructions. The immediate values are always valid only for preceding code block, so the index (which ranges from 0 to 1023) is relative and the actuall address is calculated as address_of_the_block + size_of_a_block + index.
+
+Using this solution, it's possible to have smaller instruction opcode size, while still having possibility to place arbitrary numerical values in the code
+
+the compiler can even optimize this table and reduce duplicate values, although this can potentially cause trouble when programmer wants to make self modifying code, so it's possible to disable this optimization
+
+!!!!!!!!
+Mergins, Mutins
+!!!!!!!
+
+NEED TO RESOLVE:
+How to solve memory addressing? MOV instructions can't specify address directly, it needs to be done videa return insructions.
+
+SOLUTION:
+When MOV instructions operates with the memory, it will always use indirect addressing using one of the registers.
+
+IDEA:
+Two directional intruction - behaves like a different instruction when it's called and like a different instruction when it returns - uses 2 additional bits of RET to define an extension instruction, actuall instruction is located in the data block and refered by a key - single 32b value in the datablock.
+IDEA PROCESSED
+
+[]
+text:
+"Hello World"
