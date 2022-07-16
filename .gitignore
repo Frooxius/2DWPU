@@ -461,3 +461,8 @@ compile_commands.json
 *.bak
 incremental_db/
 modelsim/
+
+# Local folders
+arch/
+rel/
+screen/

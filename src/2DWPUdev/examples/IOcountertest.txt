@@ -1,5 +1,0 @@
-block IOcounter
-[QRY_RD] [<MOVT_R *HE] [<MOVT_R HE] [RET 10]
-[QZ_D SQ]
-[<MOVT_R LI] [RET #10]
-<ENDBLOCK>

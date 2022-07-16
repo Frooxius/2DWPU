@@ -1,6 +1,0 @@
-block TestIO
-[ADD_RD] [RET #5] [ADD_L2D]
-[ADD_RD] [ADD_UR] [ADD_DU]
-[ADD_RR] [ADD_2UD][ADD_L2L]
-[RET 0]  [>MOVT_2U LI]
-<ENDBLOCK>
